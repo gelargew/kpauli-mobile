@@ -12,7 +12,7 @@ interface ColorTheme {
 }
 
 interface ThemeProviderProps {
-    initial?: ColorTheme,
+    initial?: Theme,
     children?: any
 }
 

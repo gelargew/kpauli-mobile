@@ -1,8 +1,8 @@
-import { ColorTheme } from "./theme.interfaces";
+import { ColorTheme, Theme } from "./theme.interfaces";
 
 export { LIGHT_THEME, DARK_THEME }
 
-const DARK_THEME: ColorTheme = {
+const DARK_COLOR_THEME: ColorTheme = {
     id: 'DARK_THEME',
     bgMain: '#121212',
     bg1: 'rgba(255, 255, 255, 0.04)',
@@ -13,7 +13,7 @@ const DARK_THEME: ColorTheme = {
     shadow: '#000'
 }
 
-const LIGHT_THEME: ColorTheme = {
+const LIGHT_COLOR_THEME: ColorTheme = {
     id: 'LIGHT_THEME',
     bgMain: '#fff',
     bg1: '#5d7c8b85',
@@ -22,4 +22,14 @@ const LIGHT_THEME: ColorTheme = {
     textMain: 'rgba(0, 0, 0, 0.8)',
     textDim: 'rgba(0, 0, 0, 0.5)',
     shadow: '#121212'
+}
+
+const DARK_THEME: Theme = {
+    id: 'DARK_THEME',
+    color: DARK_COLOR_THEME
+}
+
+const LIGHT_THEME: Theme = {
+    id: 'LIGHT_THEME',
+    color: LIGHT_COLOR_THEME
 }
