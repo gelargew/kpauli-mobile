@@ -1,6 +1,4 @@
-import React from "react";
-
-export { ColorTheme, ThemeProviderProps }
+export { ColorTheme, ThemeProviderProps, Theme }
 
 interface ColorTheme {
     id: string;
@@ -16,4 +14,9 @@ interface ColorTheme {
 interface ThemeProviderProps {
     initial?: ColorTheme,
     children?: any
+}
+
+interface Theme {
+    id: string;
+    color: ColorTheme
 }

@@ -9,28 +9,30 @@ const Context = React.createContext({
     toggleTheme: () => {}
 })
 
-const ThemeProvider = React.memo<ThemeProviderProps>((props) => {
+const ThemeProvider = ((props:ThemeProviderProps) => {
     const [theme, setTheme] = useState(props.initial || DARK_THEME)
 
-    const toggleTheme = useCallback(() => {
-        if (theme.id === 'DARK_Theme') {
+    const toggleTheme = () => {
+        console.log('yes')
+        if (theme.id === 'DARK_THEME') {
             setTheme(LIGHT_THEME)
         }
         else {
             setTheme(DARK_THEME)
         }
-    }, [])
+        console.log(theme)
+    }
 
-    const MemoizedValue = useMemo(() => {
-        const value = {
-            theme,
-            toggleTheme
-        }
-        return value
-    }, [theme, toggleTheme])
+    // const MemoizedValue = useMemo(() => {
+    //     const value = {
+    //         theme,
+    //         toggleTheme
+    //     }
+    //     return value
+    // }, [theme, toggleTheme])
 
     return (
-        <Context.Provider value={MemoizedValue}>
+        <Context.Provider value={{theme, toggleTheme}}>
             {props.children}
         </Context.Provider>
     )
