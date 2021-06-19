@@ -13,8 +13,10 @@ const ThemeProvider = React.memo((props:ThemeProviderProps) => {
     const [theme, setTheme] = useState(props.initial || DARK_THEME)
 
     const toggleTheme = useCallback(() => {
-        if (theme.id === 'DARK_THEME') setTheme(LIGHT_THEME)    
-        else setTheme(DARK_THEME)      
+        setTheme(prev => {
+            if (prev.id === 'DARK_THEME') return LIGHT_THEME
+            return DARK_THEME
+        })  
     },[])
 
     const MemoizedValue = useMemo(() => {
