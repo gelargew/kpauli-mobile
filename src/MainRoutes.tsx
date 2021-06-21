@@ -6,7 +6,7 @@ import { useThemeAwareObject } from './theme/Theme.context'
 import { LandingScreen } from './screens/LandingScreen'
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native'
 import { Kpauli } from './screens/Kpauli'
-import { StackParam } from './screens/interfaces'
+import { StackParam } from './screens/types'
 
 
 const Stack = createStackNavigator<StackParam>()

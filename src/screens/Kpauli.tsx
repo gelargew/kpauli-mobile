@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FlatList, Text, View, Button, TextInput, StyleSheet } from 'react-native'
-import { MainContainer } from '../components/commons'
-import { KpauliScreenProps } from './interfaces'
+import { MainContainer, Numpad } from '../components/commons'
+import { KpauliScreenProps } from './types'
 
 
 export const Kpauli = ({data, navigation}: KpauliScreenProps) => {
@@ -17,11 +17,12 @@ export const Kpauli = ({data, navigation}: KpauliScreenProps) => {
 
     return (
         <MainContainer>
-            <View style={{flex: 1}}>
+            <View style={{height: '40%'}}>
                 <View style={styles.numbersDiv}>
                     <FlatList data={numbers} renderItem={renderNumber} />
                 </View>
             </View>
+            <Numpad />
         </MainContainer>
     )
 }

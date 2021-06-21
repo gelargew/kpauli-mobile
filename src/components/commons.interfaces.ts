@@ -1,10 +1,11 @@
 import { ViewProps } from "react-native";
 import { PressableProps } from "react-native";
 
-export { ButtonProps, MainContainerProps }
+export { CustomButtonProps, MainContainerProps }
 
-interface ButtonProps extends PressableProps {
-    title: string
+interface CustomButtonProps extends PressableProps {
+    title: string,
+    fontSize?: number
 }
 
 interface MainContainerProps extends ViewProps {
