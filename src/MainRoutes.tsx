@@ -6,10 +6,10 @@ import { useThemeAwareObject } from './theme/Theme.context'
 import { LandingScreen } from './screens/LandingScreen'
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native'
 import { Kpauli } from './screens/Kpauli'
-import { Text } from 'react-native-elements'
+import { StackParam } from './screens/interfaces'
 
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator<StackParam>()
 
 export const MainRoutes = () => {
 
@@ -18,7 +18,7 @@ export const MainRoutes = () => {
         <NavigationContainer theme={DarkTheme}>
                 <Stack.Navigator headerMode='none' initialRouteName='Home'>
                     <Stack.Screen name='Home' component={LandingScreen} />
-                    <Stack.Screen name='kpauli' component={Kpauli} />
+                    <Stack.Screen name='Kpauli' component={Kpauli} />
                 </Stack.Navigator>   
         </NavigationContainer>
         

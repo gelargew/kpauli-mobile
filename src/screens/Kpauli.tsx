@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { FillView } from './Wrapper'
 import { FlatList, Text, View, Button, TextInput, StyleSheet } from 'react-native'
-import { withTheme } from 'react-native-elements'
+import { MainContainer } from '../components/commons'
+import { KpauliScreenProps } from './interfaces'
 
 
-export const Kpauli = () => {
+export const Kpauli = ({data, navigation}: KpauliScreenProps) => {
     const [numbers, setNumbers] = useState([2,4,3,1,1])
     const [answers, setAnswers] = useState(['A', 'A', 'A', '', ''])
 
@@ -16,11 +16,13 @@ export const Kpauli = () => {
     )
 
     return (
-        <View style={{flex: 1}}>
-            <View style={styles.numbersDiv}>
-                <FlatList data={numbers} renderItem={renderNumber} />
+        <MainContainer>
+            <View style={{flex: 1}}>
+                <View style={styles.numbersDiv}>
+                    <FlatList data={numbers} renderItem={renderNumber} />
+                </View>
             </View>
-        </View>
+        </MainContainer>
     )
 }
 

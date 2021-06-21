@@ -2,7 +2,7 @@ import React from 'react'
 import { useMemo } from 'react'
 import { ButtonProps, Button, StyleSheet, TextInput, TextInputProps, View, ViewProps } from 'react-native'
 import { useTheme, useThemeAwareObject } from '../theme/Theme.context'
-import { MainContainerProps } from './commons.interface'
+import { MainContainerProps } from './commons.interfaces'
 
 
 
