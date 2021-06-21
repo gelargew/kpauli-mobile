@@ -6,15 +6,15 @@ import { MainContainerProps, CustomButtonProps } from './commons.interfaces'
 
 
 
-export { ButtonMain, MainContainer, Numpad }
+export { StyledButton, MainContainer, Numpad }
 
-const ButtonMain = (props:CustomButtonProps) => {
+const StyledButton = (props:CustomButtonProps) => {
     const {theme} = useTheme()
 
     return (
     <Pressable {...props} style={({pressed}) => [
         {
-        margin: 15,
+        margin: 10,
         backgroundColor: pressed ? theme.color.bg3 : 'none',
         justifyContent: 'center',
         borderRadius: 5,
@@ -48,12 +48,14 @@ const MainContainer = (props:MainContainerProps) => {
             </View>
 }
 
+
+
 const Numpad = ({onPress}: {onPress?: () => void}) => {
 
     return (
         <View style={{flex: 1, minWidth: 300, flexWrap: 'wrap', flexDirection: 'row', marginBottom: 10, borderRadius: 5}}>
             {[1,2,3,4,5,6,7,8,9].map(num => {
-                return <ButtonMain style={{width:'32%', height: '24%',  margin: 'auto', backgroundColor: 'grey'}} fontSize={36} onPress={() => console.log(num)} title={num.toString()}/>
+                return <StyledButton style={{width:'32%', height: '24%',  margin: 'auto', backgroundColor: 'grey'}} fontSize={36} onPress={() => console.log(num)} title={num.toString()}/>
             })}
 
         </View>

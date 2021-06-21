@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 import { View, Text } from 'react-native'
 import { useTheme, useThemeAwareObject } from '../theme/Theme.context'
 import { Theme } from '../theme/theme.interfaces'
-import { ButtonMain, MainContainer } from '../components/commons'
+import { StyledButton, MainContainer } from '../components/commons'
 import { LogoMain } from '../components/icons'
 import { LandingScreenProps } from './types'
 
@@ -19,9 +19,9 @@ export const LandingScreen = ({navigation}:LandingScreenProps) => {
             <LogoMain />
             <View style={styles.container}>
                 <Text style={styles.button}>HALLO</Text>
-                <ButtonMain title='START' onPress={() => navigation.navigate('Kpauli')} />
-                <ButtonMain title='RESULT' onPress={toggleTheme} />
-                <ButtonMain title='testbutton' onPress={() => {}} />
+                <StyledButton title='START' onPress={() => navigation.navigate('Kpauli')} />
+                <StyledButton title='RESULT' onPress={toggleTheme} />
+                <StyledButton title='testbutton' onPress={() => {}} />
             </View>
         </MainContainer>
     )
