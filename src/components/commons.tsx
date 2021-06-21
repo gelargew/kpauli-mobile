@@ -12,7 +12,7 @@ const StyledButton = (props:CustomButtonProps) => {
     const {theme} = useTheme()
 
     return (
-    <Pressable {...props} style={({pressed}) => [
+    <Pressable style={({pressed}) => [
         {
         margin: 10,
         backgroundColor: pressed ? theme.color.bg3 : 'none',
