@@ -10,7 +10,7 @@ const DARK_COLOR_THEME: ColorTheme = {
     bg3: 'rgba(255, 255, 255, 0.11)',
     textMain: '#fff',
     textDim: 'rgba(255, 255, 255, 0.5)',
-    shadow: '#000'
+    shadow: '#000',
 }
 
 const LIGHT_COLOR_THEME: ColorTheme = {

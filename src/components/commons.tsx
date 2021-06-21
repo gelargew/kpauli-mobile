@@ -12,12 +12,16 @@ const ButtonMain = (props:CustomButtonProps) => {
     const {theme} = useTheme()
 
     return (
-    <Pressable style={{
+    <Pressable {...props} style={({pressed}) => [
+        {
         margin: 15,
-        backgroundColor: theme.color.bg2,
+        backgroundColor: pressed ? theme.color.bg3 : 'none',
         justifyContent: 'center',
-        borderRadius: 5
-    }} {...props}>
+        borderRadius: 5,
+        padding: 5
+        },
+        {}
+    ]} {...props}>
 
         <Text style={{
                 color: theme.color.textMain,
@@ -47,9 +51,9 @@ const MainContainer = (props:MainContainerProps) => {
 const Numpad = ({onPress}: {onPress?: () => void}) => {
 
     return (
-        <View style={{flex: 1, minWidth: 300, flexWrap: 'wrap', backgroundColor: 'red', flexDirection: 'row', marginBottom: 10, borderRadius: 5}}>
+        <View style={{flex: 1, minWidth: 300, flexWrap: 'wrap', flexDirection: 'row', marginBottom: 10, borderRadius: 5}}>
             {[1,2,3,4,5,6,7,8,9].map(num => {
-                return <ButtonMain style={{width:'32%', height: '24%',  margin: 'auto'}} fontSize={36} onPress={() => console.log(num)} title={num.toString()}/>
+                return <ButtonMain style={{width:'32%', height: '24%',  margin: 'auto', backgroundColor: 'grey'}} fontSize={36} onPress={() => console.log(num)} title={num.toString()}/>
             })}
 
         </View>
