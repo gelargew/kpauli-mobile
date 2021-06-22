@@ -16,6 +16,10 @@ export const Kpauli = ({data, navigation}: KpauliScreenProps) => {
         </View>
     )
 
+    const handlePress = (value: number | string) => {
+        console.log(value)
+    }
+
     return (
         <MainContainer>
             <View style={{flex: 1}}>
@@ -23,7 +27,7 @@ export const Kpauli = ({data, navigation}: KpauliScreenProps) => {
                     <FlatList data={numbers} renderItem={renderNumber} />
                 </View>
             </View>
-            <Numpad />
+            <Numpad onPress={handlePress} />
         </MainContainer>
     )
 }

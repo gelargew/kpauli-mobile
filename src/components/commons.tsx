@@ -2,7 +2,7 @@ import React from 'react'
 import { useMemo } from 'react'
 import { ButtonProps, Button, TextInput, TextInputProps, View, Pressable, Text } from 'react-native'
 import { useTheme, useThemeAwareObject } from '../theme/Theme.context'
-import { MainContainerProps, CustomButtonProps } from './commons.interfaces'
+import { MainContainerProps, CustomButtonProps } from './interfaces'
 
 
 
@@ -15,10 +15,15 @@ const StyledButton = (props:CustomButtonProps) => {
     <Pressable style={({pressed}) => [
         {
         margin: 10,
-        backgroundColor: pressed ? theme.color.bg3 : 'none',
+        backgroundColor: pressed ? theme.color.bg3 : theme.color.bg1,
         justifyContent: 'center',
         borderRadius: 5,
-        padding: 5
+        padding: 5,
+        shadowColor: theme.color.shadow,
+        shadowOffset: {width: 4, height: 4},
+        shadowRadius: 5,
+        width: '100%',
+        elevation: 4
         },
         {}
     ]} {...props}>

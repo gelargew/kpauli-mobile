@@ -3,16 +3,17 @@ import { View, GestureResponderEvent } from 'react-native'
 import { useThemeAwareObject } from '../theme/Theme.context'
 import { Theme } from '../theme/theme.interfaces'
 import { StyledButton } from './commons'
+import { NumpadProps } from './interfaces'
 
 export { Numpad }
 
 const NUMBERS = [1,2,3,4,5,6,7,8,9]
 
-const Numpad = () => {
+const Numpad = ({onPress}:NumpadProps) => {
     const styles = useThemeAwareObject(createStyle)
 
     const handlePress = (value:string | number) => {
-        console.log(value)
+        if (onPress) onPress(value)
     }
 
     return (
