@@ -1,13 +1,18 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { FlatList, Text, View, Button, TextInput, StyleSheet } from 'react-native'
 import { MainContainer } from '../components/commons'
 import { Numpad } from '../components/Numpad'
 import { KpauliScreenProps } from './types'
+import { randomArray } from '../utils'
+
 
 
 export const Kpauli = ({data, navigation}: KpauliScreenProps) => {
-    const [numbers, setNumbers] = useState(() => [2,4,3,1,1])
-    const [answers, setAnswers] = useState(['A', 'A', 'A', '', ''])
+    const [numbers, setNumbers] = useState(() => randomArray({length: 1000}))
+    const [answers, setAnswers] = useState(() => new Array(1000).fill(''))
+    const [results, setResults] = useState(() => new Array(1000).fill(0))
+    const numbersRef = useRef<FlatList>(null!)
+    const [position, setPosition] = useState(0)
 
     const renderNumber = ({item, index}:any) => (
         <View key={index}>
@@ -17,14 +22,20 @@ export const Kpauli = ({data, navigation}: KpauliScreenProps) => {
     )
 
     const handlePress = (value: number | string) => {
-        console.log(value)
+        setPosition(prev => prev + 1)
+        numbersRef.current.scrollToIndex({index: position})
     }
 
     return (
         <MainContainer>
             <View style={{flex: 1}}>
                 <View style={styles.numbersDiv}>
-                    <FlatList data={numbers} renderItem={renderNumber} />
+                    <FlatList 
+                    ref={numbersRef} 
+                    data={numbers} 
+                    keyExtractor={(i, idx) => i + idx.toString()} 
+                    scrollEnabled={false} 
+                    renderItem={renderNumber} />
                 </View>
             </View>
             <Numpad onPress={handlePress} />
@@ -37,7 +48,6 @@ const styles = StyleSheet.create({
     numbersDiv: {
         width: 100,
         height: '100%',
-        backgroundColor: 'rgba(255, 255, 255, 0.07)',
         padding: 10,
         justifyContent: 'center',
         alignItems: 'center'

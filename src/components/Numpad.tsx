@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, GestureResponderEvent } from 'react-native'
+import { View, FlatList } from 'react-native'
 import { useThemeAwareObject } from '../theme/Theme.context'
 import { Theme } from '../theme/theme.interfaces'
 import { StyledButton } from './commons'
@@ -7,7 +7,7 @@ import { NumpadProps } from './interfaces'
 
 export { Numpad }
 
-const NUMBERS = [1,2,3,4,5,6,7,8,9]
+const NUMBERS = [1,2,3,4,5,6,7,8,9, 'down', 0, 'up']
 
 const Numpad = ({onPress}:NumpadProps) => {
     const styles = useThemeAwareObject(createStyle)
@@ -18,16 +18,10 @@ const Numpad = ({onPress}:NumpadProps) => {
 
     return (
         <View style={styles.container}>
-            {NUMBERS.map(num => 
-                <StyledButton fontSize={36} style={styles.button} 
-                onPress={() => handlePress(num)} title={num.toString()} />
+            {NUMBERS.map(val => 
+                <StyledButton key={val.toString()} fontSize={36} style={styles.button} 
+                onPress={() => handlePress(val)} title={val.toString()} />
              )}
-             <StyledButton fontSize={36} style={styles.button} 
-             onPress={() => handlePress('left')} title='left' />
-             <StyledButton fontSize={36} style={styles.button} 
-             onPress={() => handlePress(0)} title='0' />
-             <StyledButton fontSize={36} style={styles.button} 
-             onPress={() => handlePress('right')} title='right' />
         </View>
     )
 }
