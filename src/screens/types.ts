@@ -5,7 +5,8 @@ export { StackParam, LandingScreenProps, KpauliScreenProps, renderNumberProps }
 type StackParam ={
     Home: undefined,
     Kpauli: any,
-    Launch: undefined
+    Launch: undefined,
+    Result: undefined
 }
 
 type LandingScreenProps = {

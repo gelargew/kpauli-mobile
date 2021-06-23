@@ -58,7 +58,8 @@ export const Kpauli = ({data, navigation}: KpauliScreenProps) => {
                     data={answers} 
                     keyExtractor={(i, idx) => idx.toString()} 
                     scrollEnabled={false}
-                    renderItem={renderNumber} />
+                    renderItem={renderNumber}
+                    removeClippedSubviews={true} />
                 </View>
             </View>
             <Numpad disabled={NumpadDisabled} onPress={handlePress} />

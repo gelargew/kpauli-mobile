@@ -28,6 +28,7 @@ const Numpad = (props:NumpadProps) => {
 
 const createStyle = (theme:Theme) => ({
     button: ({pressed}:{pressed: boolean}) => ({
+        backgroundColor: pressed ? theme.color.bg3 : theme.color.bg1,
         width: '32%',
         margin: 'auto',
         alignText: 'center',
