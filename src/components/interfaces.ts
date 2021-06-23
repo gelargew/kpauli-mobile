@@ -1,5 +1,4 @@
-import { ViewProps } from "react-native";
-import { PressableProps, ViewStyle } from "react-native";
+import { PressableProps, ViewStyle, ViewProps } from "react-native";
 
 export { CustomButtonProps, MainContainerProps, NumpadProps }
 
@@ -14,6 +13,7 @@ interface MainContainerProps extends ViewProps {
     children: any
 }
 
-interface NumpadProps {
-    onPress?: (value: string | number) => void
+interface NumpadProps extends ViewProps {
+    onPress?: (value: string | number) => void,
+    disabled?: boolean
 }

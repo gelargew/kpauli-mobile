@@ -1,6 +1,6 @@
 import { StackNavigationProp } from "@react-navigation/stack"
 
-export { StackParam, LandingScreenProps, KpauliScreenProps }
+export { StackParam, LandingScreenProps, KpauliScreenProps, renderNumberProps }
 
 type StackParam ={
     Home: undefined,
@@ -15,4 +15,10 @@ type LandingScreenProps = {
 type KpauliScreenProps = {
     navigation: StackNavigationProp<StackParam, 'Kpauli'>,
     data: any
+}
+
+type renderNumberProps = {
+    index: number,
+    item: any,
+    numbers: number[]
 }

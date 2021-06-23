@@ -9,17 +9,17 @@ export { Numpad }
 
 const NUMBERS = [1,2,3,4,5,6,7,8,9, 'down', 0, 'up']
 
-const Numpad = ({onPress}:NumpadProps) => {
+const Numpad = (props:NumpadProps) => {
     const styles = useThemeAwareObject(createStyle)
 
     const handlePress = (value:string | number) => {
-        if (onPress) onPress(value)
+        if (props.onPress) props.onPress(value)
     }
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container} {...props}>
             {NUMBERS.map(val => 
-                <StyledButton key={val.toString()} fontSize={36} style={styles.button} 
+                <StyledButton disabled={props.disabled} key={val.toString()} fontSize={36} style={styles.button} 
                 onPress={() => handlePress(val)} title={val.toString()} />
              )}
         </View>
@@ -29,7 +29,6 @@ const Numpad = ({onPress}:NumpadProps) => {
 const createStyle = (theme:Theme) => ({
     button: ({pressed}:{pressed: boolean}) => ({
         width: '32%',
-        backgroundColor: pressed ? theme.color.bg3 : 'none',
         margin: 'auto',
         alignText: 'center',
         borderRadius: 5,
