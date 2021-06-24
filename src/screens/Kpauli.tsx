@@ -7,16 +7,17 @@ import { randomArray } from '../utils'
 
 
 
-export const Kpauli = ({data, navigation}: KpauliScreenProps) => {
-    const dimension = useWindowDimensions()
-    const [numbers, setNumbers] = useState(() => randomArray({length: 100}))
-    const [answers, setAnswers] = useState(() => new Array(100).fill(''))
-    const [results, setResults] = useState(() => new Array(100).fill(0))
+export const Kpauli = ({route, navigation}: KpauliScreenProps) => {
+    const {length, time} = route.params
+    const [numbers, setNumbers] = useState(() => randomArray({length: length}))
+    const [answers, setAnswers] = useState(() => new Array(length).fill(''))
+    const [results, setResults] = useState(() => new Array(length).fill(0))
     const numbersRef = useRef<FlatList>(null!)
     const [NumpadDisabled, setNumpadDisabled] = useState(false)
     const [position, setPosition] = useState(0)
 
     useLayoutEffect(() => {
+        console.log(route.params)
         setTimeout(() => numbersRef.current.scrollToOffset({offset: position * 100}), 100)
     }, [position])
 

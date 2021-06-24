@@ -2,7 +2,7 @@ import React from 'react'
 import { View, FlatList } from 'react-native'
 import { useThemeAwareObject } from '../theme/Theme.context'
 import { Theme } from '../theme/theme.interfaces'
-import { StyledButton } from './commons'
+import { PlainButton } from './commons'
 import { NumpadProps } from './interfaces'
 
 export { Numpad }
@@ -19,7 +19,7 @@ const Numpad = (props:NumpadProps) => {
     return (
         <View style={styles.container} {...props}>
             {NUMBERS.map(val => 
-                <StyledButton disabled={props.disabled} key={val.toString()} fontSize={36} style={styles.button} 
+                <PlainButton disabled={props.disabled} key={val.toString()} fontSize={36} style={styles.button} 
                 onPress={() => handlePress(val)} title={val.toString()} />
              )}
         </View>

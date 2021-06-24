@@ -1,20 +1,42 @@
 import React from 'react'
 import { useMemo } from 'react'
-import { ButtonProps, Button, TextInput, TextInputProps, View, Pressable, Text } from 'react-native'
+import { TextProps, TextInput, TextInputProps, View, Pressable, Text } from 'react-native'
+import { color } from 'react-native-elements/dist/helpers'
 import { useTheme, useThemeAwareObject } from '../theme/Theme.context'
-import { MainContainerProps, CustomButtonProps } from './interfaces'
+import { MainContainerProps, CustomButtonProps, CustomTextProps } from './interfaces'
 
 
 
-export { StyledButton, MainContainer, Numpad }
+export { StyledButton, MainContainer, Numpad, StyledText, PlainButton }
+
+const PlainButton = (props:CustomButtonProps) => {
+    const {theme} = useTheme()
+
+    return (
+    <Pressable  style={({pressed}) => [
+        {
+        borderRadius: 5,
+        padding: 5,
+        justifyContent: 'center',
+        ...props.style
+        },
+        {}
+    ]} {...props} >
+        <Text style={{
+                color: theme.color.textMain,
+                textAlign: 'center',
+                fontSize: props.fontSize
+            }}>{props.title}</Text>
+    </Pressable>
+    )
+}
 
 const StyledButton = (props:CustomButtonProps) => {
     const {theme} = useTheme()
 
     return (
-    <Pressable style={({pressed}) => [
+    <Pressable {...props} style={({pressed}) => [
         {
-        margin: 10,
         backgroundColor: pressed ? theme.color.bg3 : theme.color.bg1,
         justifyContent: 'center',
         borderRadius: 5,
@@ -23,19 +45,23 @@ const StyledButton = (props:CustomButtonProps) => {
         shadowOffset: {width: 4, height: 4},
         shadowRadius: 5,
         width: '100%',
-        elevation: 4
+        elevation: 4,
+        ...props.style
         },
         {}
-    ]} {...props}>
-
+    ]} >
         <Text style={{
                 color: theme.color.textMain,
                 textAlign: 'center',
                 fontSize: props.fontSize
             }}>{props.title}</Text>
-
     </Pressable>
     )
+}
+
+const StyledText = (props:CustomTextProps) => {
+    const {theme} = useTheme()
+    return <Text {...props} style={{color: theme.color.textMain, ...props.style}} />
 }
 
 const MainContainer = (props:MainContainerProps) => {

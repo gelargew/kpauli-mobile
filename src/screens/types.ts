@@ -1,6 +1,7 @@
 import { StackNavigationProp } from "@react-navigation/stack"
+import { RouteProp } from "@react-navigation/native"
 
-export { StackParam, LandingScreenProps, KpauliScreenProps, renderNumberProps }
+export { StackParam, LandingScreenProps, KpauliScreenProps, renderNumberProps, LaunchScreenProps }
 
 type StackParam ={
     Home: undefined,
@@ -15,7 +16,16 @@ type LandingScreenProps = {
 
 type KpauliScreenProps = {
     navigation: StackNavigationProp<StackParam, 'Kpauli'>,
-    data: any
+    route: {
+        params: {
+            length: number,
+            time: number
+        }
+    }
+}
+
+type LaunchScreenProps = {
+    navigation: StackNavigationProp<StackParam, 'Launch'>
 }
 
 type renderNumberProps = {

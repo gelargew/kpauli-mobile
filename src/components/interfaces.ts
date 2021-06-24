@@ -1,12 +1,14 @@
-import { PressableProps, ViewStyle, ViewProps } from "react-native";
+import { PressableProps, ViewStyle, ViewProps, TextProps } from "react-native";
 
-export { CustomButtonProps, MainContainerProps, NumpadProps }
+export { CustomButtonProps, MainContainerProps, NumpadProps, CustomTextProps }
+
 
 
 interface CustomButtonProps extends PressableProps {
     title: string,
     addStyle?: ViewStyle,
-    fontSize?: number
+    fontSize?: number,
+    style?: object | (() => object)
 }
 
 interface MainContainerProps extends ViewProps {
@@ -16,4 +18,9 @@ interface MainContainerProps extends ViewProps {
 interface NumpadProps extends ViewProps {
     onPress?: (value: string | number) => void,
     disabled?: boolean
+}
+
+interface CustomTextProps extends TextProps {
+    style?: object
+    children?: any
 }
