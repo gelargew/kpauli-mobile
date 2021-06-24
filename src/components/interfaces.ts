@@ -1,6 +1,6 @@
 import { PressableProps, ViewStyle, ViewProps, TextProps } from "react-native";
 
-export { CustomButtonProps, MainContainerProps, NumpadProps, CustomTextProps }
+export { CustomButtonProps, MainContainerProps, NumpadProps, CustomTextProps, TimerProps }
 
 
 
@@ -23,4 +23,9 @@ interface NumpadProps extends ViewProps {
 interface CustomTextProps extends TextProps {
     style?: object
     children?: any
+}
+
+interface TimerProps extends CustomTextProps {
+    performTimesUp?: Function,
+    initialTime?: number,
 }
