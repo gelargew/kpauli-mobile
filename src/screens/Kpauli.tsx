@@ -1,16 +1,34 @@
-import React, { PureComponent, useLayoutEffect, useRef, useState } from 'react'
+import React, { PureComponent, useContext, useLayoutEffect, useRef, useState } from 'react'
 import { FlatList, Text, View, useWindowDimensions, StyleSheet } from 'react-native'
-import { MainContainer } from '../components/commons'
+import { useNavigation } from '@react-navigation/core'
+
+import { MainContainer, StyledButton } from '../components/commons'
 import { Numpad } from '../components/Numpad'
 import { KpauliScreenProps, renderNumberProps } from './types'
 import { randomArray } from '../utils'
 
+import { Timer } from '../components/Timer'
+import { Storage } from '../MainRoutes'
 
+
+class RenderNumber extends PureComponent<renderNumberProps> {
+    render() {
+        return (
+        <View key={this.props.index}>
+            <Text style={styles.number}>{this.props.numbers[this.props.index]}</Text>
+            <Text style={styles.number}>{this.props.item}</Text>
+        </View>)
+    }
+}
 
 export const Kpauli = ({route, navigation}: KpauliScreenProps) => {
-    const {length, time} = route.params
-    const [numbers, setNumbers] = useState(() => randomArray({length: length}))
-    const [answers, setAnswers] = useState(() => new Array(length).fill(''))
+    const {
+        numbers,
+        answers,
+        time,
+        updateResults,
+        updateAnswers
+    } = useContext(Storage)
     const [results, setResults] = useState(() => new Array(length).fill(0))
     const numbersRef = useRef<FlatList>(null!)
     const [NumpadDisabled, setNumpadDisabled] = useState(false)
@@ -32,10 +50,7 @@ export const Kpauli = ({route, navigation}: KpauliScreenProps) => {
     const handlePress = async (value: number | string) => {
         if (typeof value === 'number') {
             setNumpadDisabled(true)
-            setAnswers(prev => {
-                prev[position] = value
-                return [...prev]
-            })
+            updateAnswers(position, value.toString())
             goDown()
             setTimeout(() => setNumpadDisabled(false), 250)
         }
@@ -48,10 +63,18 @@ export const Kpauli = ({route, navigation}: KpauliScreenProps) => {
     const goDown = () => {
         if (position < numbers.length) setPosition(prev => prev + 1)
     }
+    const handleSubmit = () => {
+
+    }
 
     return (
         <MainContainer>
-            <View style={{flex: 1}}>
+            <View style={{flex: 1}}>          
+                <View style={styles.timer}>
+                    <Timer initialTime={time*60} performTimesUp={handleSubmit} />
+                    <StyledButton onPress={handleSubmit} title='submit' />
+                </View>
+                
                 <View style={styles.numbersDiv}>
                     <View style={styles.answerLine} />
                     <FlatList 
@@ -66,16 +89,6 @@ export const Kpauli = ({route, navigation}: KpauliScreenProps) => {
             <Numpad disabled={NumpadDisabled} onPress={handlePress} />
         </MainContainer>
     )
-}
-
-class RenderNumber extends PureComponent<renderNumberProps> {
-    render() {
-        return (
-        <View key={this.props.index}>
-            <Text style={styles.number}>{this.props.numbers[this.props.index]}</Text>
-            <Text style={styles.number}>{this.props.item}</Text>
-        </View>)
-    }
 }
 
 const styles = StyleSheet.create({
@@ -101,5 +114,12 @@ const styles = StyleSheet.create({
         borderTopWidth: 2,
         borderColor: 'green',
         top: 100
+    },
+    timer: {
+        position: 'absolute',
+        left: -120,
+        top: 100,
+        width: 100,
+        alignItems: 'center'
     }
 })

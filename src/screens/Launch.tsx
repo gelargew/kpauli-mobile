@@ -3,12 +3,16 @@ import { View, Text, Animated } from 'react-native'
 import { MainContainer, StyledButton, StyledText } from '../components/commons'
 import { Slider } from 'react-native-elements'
 import { LaunchScreenProps } from './types'
+import { useContext } from 'react'
+import { Storage } from '../MainRoutes'
 
 export const Launch = ({navigation}:LaunchScreenProps) => {
-    const [length, setLength] = useState(1000)
-    const [time, setTime] = useState(20)
-    const [operation, setOperation] = useState('addition')
-    const [numeralSystem, setNumeralSystem] = useState('latin')
+    const {launch, time, length, setLength, setTime} = useContext(Storage)
+
+    const handleStart = () => {
+        launch()
+        navigation.navigate('Kpauli')
+    }
 
 
     return (
@@ -41,7 +45,7 @@ export const Launch = ({navigation}:LaunchScreenProps) => {
                 thumbTouchSize={styles.thumbSize} 
                  />
 
-                 <StyledButton title='START' onPress={() => navigation.navigate('Kpauli', {length, time})} />
+                <StyledButton title='START' onPress={handleStart} />
                 
             </View>
         </MainContainer>
