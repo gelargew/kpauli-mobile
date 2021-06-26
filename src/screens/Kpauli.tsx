@@ -26,16 +26,14 @@ export const Kpauli = ({route, navigation}: KpauliScreenProps) => {
         numbers,
         answers,
         time,
-        updateResults,
+        position,
+        setPosition,
         updateAnswers
     } = useContext(Storage)
-    const [results, setResults] = useState(() => new Array(length).fill(0))
     const numbersRef = useRef<FlatList>(null!)
     const [NumpadDisabled, setNumpadDisabled] = useState(false)
-    const [position, setPosition] = useState(0)
 
     useLayoutEffect(() => {
-        console.log(route.params)
         setTimeout(() => numbersRef.current.scrollToOffset({offset: position * 100}), 100)
     }, [position])
 
@@ -64,7 +62,7 @@ export const Kpauli = ({route, navigation}: KpauliScreenProps) => {
         if (position < numbers.length) setPosition(prev => prev + 1)
     }
     const handleSubmit = () => {
-
+        navigation.navigate('Result')
     }
 
     return (

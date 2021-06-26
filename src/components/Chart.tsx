@@ -1,25 +1,40 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, FlatList } from 'react-native'
+import { Storage } from '../MainRoutes'
+import { useTheme } from '../theme/Theme.context'
 import { randomArray } from '../utils'
 
 export { Scatter }
 
-const Scatter = () => {
-    const d1 = new Array(2000).fill(0)
-    const d2 = new Array(3000).fill(1)
-    const d = [...d1, ...d2]
+const getScatterThickColor = (value:number) => {
+    if (value === 1) return 'green'
+    if (value === 0) return 'yellow'
+    if (value === -1) return 'red'
+    return 'grey'
+}
 
-    const renderItem = ({item, index}:any) => <View key={index.toString()} 
+const renderScatterThick = ({ item, index }: { item: number, index: number}) => (
+    <View 
+    key={index.toString()} 
     style={{
-        backgroundColor: item === 0 ? 'blue' : 'red',
+        backgroundColor: getScatterThickColor(item),
         height: 2,
         width: 2,
         margin: 1
     }} />
-    
-    
+)
+
+
+const Scatter = () => {
+    const {results} = useContext(Storage)
+    const {theme} = useTheme()
 
     return (
-        <FlatList horizontal={false} numColumns={100} keyExtractor={(item, idx):any => idx.toString()} data={d} renderItem={renderItem} />
+        <FlatList 
+        horizontal={false} 
+        numColumns={20}
+        keyExtractor={(item, idx):any => idx.toString()} 
+        data={results} 
+        renderItem={renderScatterThick} />
     )
 }
