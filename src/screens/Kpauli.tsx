@@ -37,14 +37,9 @@ export const Kpauli = ({route, navigation}: KpauliScreenProps) => {
         setTimeout(() => numbersRef.current.scrollToOffset({offset: position * 100}), 100)
     }, [position])
 
-    const renderNumber = ({item, index}:any) => (
+    const renderNumber = ({item, index}:any) => 
         <RenderNumber item={item} index={index} numbers={numbers} />
-        // <View key={index}>
-        //     <Text style={styles.number}>{numbers[index]}</Text>
-        //     <Text style={styles.number}>{item}</Text>
-        // </View>
-    )
-
+       
     const handlePress = async (value: number | string) => {
         if (typeof value === 'number') {
             setNumpadDisabled(true)

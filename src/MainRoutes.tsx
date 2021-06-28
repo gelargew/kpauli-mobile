@@ -20,7 +20,7 @@ const MainRoutes = () => {
     return (
         <Storage.Provider value={storage}>
             <NavigationContainer theme={DarkTheme}>
-                <Stack.Navigator headerMode='none' initialRouteName='Launch'>
+                <Stack.Navigator headerMode='none' initialRouteName='Result'>
                     <Stack.Screen name='Home' component={LandingScreen} />
                     <Stack.Screen name='Launch' component={Launch} />
                     <Stack.Screen name='Kpauli' component={Kpauli} />
