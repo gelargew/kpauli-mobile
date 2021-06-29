@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useMemo } from 'react'
 import { View, FlatList } from 'react-native'
 import { Storage } from '../MainRoutes'
 import Svg, { Circle, Rect, G } from 'react-native-svg'
@@ -39,82 +39,39 @@ const Scatter = () => {
     )
 }
 
-const Pie = () => {
+const Pie = ({r=50}) => {
     const {results} = useContext(Storage)
-    const [wrong, empty, correct] = results.reduce((accumulator, curValue) => {
+    const resultCount = results.reduce((accumulator, curValue) => {
         accumulator[curValue + 1]++
         return accumulator
     }, [0, 0, 0])
-    const data2 = [
-        {
-            name: 'correct',
-            count: correct,
-            color: 'green',
-            legendFontColor: "#7F7F7F",
-    legendFontSize: 15
-        },
-        {
-            name: 'empty',
-            count: empty,
-            color: 'yellow',
-            legendFontColor: "#7F7F7F",
-    legendFontSize: 15
-        },
-        {
-            name: 'wrong',
-            count: wrong,
-            color: 'red',
-            legendFontColor: "#7F7F7F",
-    legendFontSize: 15
-        }
-    ]
-    const data = [
-        {
-          name: "Seoul",
-          population: 21500000,
-          color: "rgba(131, 167, 234, 1)",
-          legendFontColor: "#7F7F7F",
-          legendFontSize: 15
-        },
-        {
-          name: "Toronto",
-          population: 2800000,
-          color: "#F00",
-          legendFontColor: "#7F7F7F",
-          legendFontSize: 15
-        },
-        {
-          name: "Beijing",
-          population: 527612,
-          color: "red",
-          legendFontColor: "#7F7F7F",
-          legendFontSize: 15
-        },
-        {
-          name: "New York",
-          population: 8538000,
-          color: "#ffffff",
-          legendFontColor: "#7F7F7F",
-          legendFontSize: 15
-        },
-        {
-          name: "Moscow",
-          population: 11920000,
-          color: "rgb(0, 0, 255)",
-          legendFontColor: "#7F7F7F",
-          legendFontSize: 15
-        }
-      ]
+    const {dashLengths, dashRotations} = useMemo(() => 
+      getPieDashLengthAndRotation(resultCount, r, results.length), [r])
 
-    return <PieChart
-    data={data}
-    width={200}
-    height={100}
-    accessor={"population"}
-    backgroundColor={"transparent"}
-    paddingLeft={"15"}
-    center={[10, 50]}
-    absolute
-  />
+    return (
+      <Svg width='100%' height='100%'>
+        <Circle cx='100' cy='100' r='100' fill='transparent' strokeDasharray={[100, 528]} stroke='red' strokeWidth={100}  />
+        <Circle cx='100' cy='100' r='100' fill='transparent' 
+        strokeDasharray={[50, 578]} stroke='blue' strokeWidth={100} strokeDashoffset={-100} />
+        <Circle cx='100' cy='100' r='100' fill='transparent' 
+        strokeDasharray={[628 - 150, 150]} stroke='yellow' strokeWidth={100} strokeDashoffset={-150} />
+      </Svg>
+    )
 }
 
+
+
+
+const sumOfArray = (arr:number[]) => arr.reduce((preVal, curVal) => preVal + curVal)
+
+const getPieDashLengthAndRotation = (values:number[], r:number, length:number) => {
+  const circumference = 2 * 3.1415927 * r
+  const dashLengths =  values.map(count => count * circumference / length)
+  let dashRotations:number[] = []
+  dashLengths.reduce((preVal, curVal) => {
+    dashRotations.push(preVal)
+    return preVal + curVal
+  }, 0)
+
+  return {dashLengths, dashRotations}
+}
