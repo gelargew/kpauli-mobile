@@ -37,6 +37,7 @@ const StyledButton = (props:CustomButtonProps) => {
     return (
     <Pressable {...props} style={({pressed}) => [
         {
+        margin: 5,
         backgroundColor: pressed ? theme.color.bg3 : theme.color.bg1,
         justifyContent: 'center',
         borderRadius: 5,
@@ -44,7 +45,7 @@ const StyledButton = (props:CustomButtonProps) => {
         shadowColor: theme.color.shadow,
         shadowOffset: {width: 4, height: 4},
         shadowRadius: 5,
-        width: '100%',
+        width: '90%',
         elevation: 4,
         ...props.style
         },
@@ -67,15 +68,15 @@ const StyledText = (props:CustomTextProps) => {
 const MainContainer = (props:MainContainerProps) => {
     const {theme} = useTheme()
 
-    return <View 
+    return <View {...props}
                 style={{
                     margin: 3,
                     flex: 1, 
                     justifyContent: 'center', 
                     alignItems: 'center',
-                    backgroundColor: theme.color.bgMain
-                }} 
-                {...props}>
+                    backgroundColor: theme.color.bgMain,
+                    ...props.style
+            }}>
             </View>
 }
 

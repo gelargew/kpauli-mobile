@@ -30,7 +30,8 @@ const useStorage = () => {
     const [numbers, setNumber] = useState<number[]>([])
     const [answers, setAnswers] = useState<string[]>([])
     const [results, setResults] = useState<number[]>([])
-    const [position, setPosition] = useState<number>(0)
+    const [position, setPosition] = useState(0)
+    const [answerChangedCount, setAnswerChangedCount] = useState(0)
 
     const launch = ()  => {
         setLength(length)
@@ -41,6 +42,7 @@ const useStorage = () => {
     }
     const updateAnswers = (position:number, answer:string) => {
         setAnswers(prev => {
+            if (prev[position] != '') setAnswerChangedCount(previous => previous + 1)
             prev[position] = answer
             return [...prev]
         })

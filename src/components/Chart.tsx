@@ -1,11 +1,10 @@
 import React, { useContext } from 'react'
 import { View, FlatList } from 'react-native'
 import { Storage } from '../MainRoutes'
-import { useTheme } from '../theme/Theme.context'
-import { randomArray } from '../utils'
-import Svg, { Circle, Rect } from 'react-native-svg'
+import Svg, { Circle, Rect, G } from 'react-native-svg'
+import { PieChart } from 'react-native-chart-kit'
 
-export { Scatter }
+export { Scatter, Pie }
 
 const getScatterThickColor = (value:number) => {
     if (value === 1) return 'green'
@@ -19,8 +18,8 @@ const ScatterThick = ({ value, index }: { value: number, index: number}) => {
         y: index % 50,
         x: Math.floor(index/50),
         fill: getScatterThickColor(value),
-        width: 1,
-        heigth: 1
+        height: '1',
+        width: '1'
     }
     return <Rect {...props} />
 }
@@ -28,17 +27,94 @@ const ScatterThick = ({ value, index }: { value: number, index: number}) => {
 
 const Scatter = () => {
     const {results} = useContext(Storage)
-    const {theme} = useTheme()
-    const arr = new Array(1000).fill(0)
-    const arr2 = new Array(1000).fill(1)
-    const arr3 = new Array(1000).fill(-1)
-    const d = arr.concat(arr2, arr3)
+    const d = [1,-1, 1, ...new Array(4997).fill(0)]
 
     return (
-        <Svg viewBox='0 0 200 300'>
-            {d.map((value, index) => <ScatterThick value={value} index={index} />)}
-            <Circle cx='2' cy='2' r='2' fill='green' />
+        <Svg width='100%' height='100%' >
+            <G scale='2'>
+                {d.map((value, index) => <ScatterThick key={index} value={value} index={index} />)}
+            </G>
+            
         </Svg>
     )
+}
+
+const Pie = () => {
+    const {results} = useContext(Storage)
+    const [wrong, empty, correct] = results.reduce((accumulator, curValue) => {
+        accumulator[curValue + 1]++
+        return accumulator
+    }, [0, 0, 0])
+    const data2 = [
+        {
+            name: 'correct',
+            count: correct,
+            color: 'green',
+            legendFontColor: "#7F7F7F",
+    legendFontSize: 15
+        },
+        {
+            name: 'empty',
+            count: empty,
+            color: 'yellow',
+            legendFontColor: "#7F7F7F",
+    legendFontSize: 15
+        },
+        {
+            name: 'wrong',
+            count: wrong,
+            color: 'red',
+            legendFontColor: "#7F7F7F",
+    legendFontSize: 15
+        }
+    ]
+    const data = [
+        {
+          name: "Seoul",
+          population: 21500000,
+          color: "rgba(131, 167, 234, 1)",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 15
+        },
+        {
+          name: "Toronto",
+          population: 2800000,
+          color: "#F00",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 15
+        },
+        {
+          name: "Beijing",
+          population: 527612,
+          color: "red",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 15
+        },
+        {
+          name: "New York",
+          population: 8538000,
+          color: "#ffffff",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 15
+        },
+        {
+          name: "Moscow",
+          population: 11920000,
+          color: "rgb(0, 0, 255)",
+          legendFontColor: "#7F7F7F",
+          legendFontSize: 15
+        }
+      ]
+
+    return <PieChart
+    data={data}
+    width={200}
+    height={100}
+    accessor={"population"}
+    backgroundColor={"transparent"}
+    paddingLeft={"15"}
+    center={[10, 50]}
+    absolute
+  />
 }
 

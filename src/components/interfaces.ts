@@ -12,7 +12,8 @@ interface CustomButtonProps extends PressableProps {
 }
 
 interface MainContainerProps extends ViewProps {
-    children: any
+    children: any,
+    style?: object
 }
 
 interface NumpadProps extends ViewProps {
