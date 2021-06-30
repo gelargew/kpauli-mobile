@@ -40,21 +40,22 @@ const Scatter = () => {
 }
 
 const Pie = ({r=50}) => {
-    const {results} = useContext(Storage)
+    const results = [...new Array(800).fill(0), ...new Array(100).fill(1), ...new Array(100).fill(-1)]
     const resultCount = results.reduce((accumulator, curValue) => {
         accumulator[curValue + 1]++
         return accumulator
     }, [0, 0, 0])
-    const {dashLengths, dashRotations} = useMemo(() => 
-      getPieDashLengthAndRotation(resultCount, r, results.length), [r])
+    const pieProps = useMemo(() => 
+      getPieDashArrayAndOffset(resultCount, r, results.length), [r])
+    
+    console.log(pieProps)
 
     return (
       <Svg width='100%' height='100%'>
-        <Circle cx='100' cy='100' r='100' fill='transparent' strokeDasharray={[100, 528]} stroke='red' strokeWidth={100}  />
-        <Circle cx='100' cy='100' r='100' fill='transparent' 
-        strokeDasharray={[50, 578]} stroke='blue' strokeWidth={100} strokeDashoffset={-100} />
-        <Circle cx='100' cy='100' r='100' fill='transparent' 
-        strokeDasharray={[628 - 150, 150]} stroke='yellow' strokeWidth={100} strokeDashoffset={-150} />
+        <G>
+          {pieProps.map((props, idx) => 
+          <Circle key={idx} cx='100' cy='100' r='50' fill='transparent' {...props} strokeWidth={100} />)}
+        </G>
       </Svg>
     )
 }
@@ -64,14 +65,22 @@ const Pie = ({r=50}) => {
 
 const sumOfArray = (arr:number[]) => arr.reduce((preVal, curVal) => preVal + curVal)
 
-const getPieDashLengthAndRotation = (values:number[], r:number, length:number) => {
-  const circumference = 2 * 3.1415927 * r
-  const dashLengths =  values.map(count => count * circumference / length)
-  let dashRotations:number[] = []
-  dashLengths.reduce((preVal, curVal) => {
-    dashRotations.push(preVal)
-    return preVal + curVal
-  }, 0)
 
-  return {dashLengths, dashRotations}
+const pieColor = ['red', 'yellow', 'green']
+
+const getPieDashArrayAndOffset = (values:number[], r:number, total:number) => {
+  const circumference = 2 * 3.1415927 * r
+  let dashOffset = 0
+  let pieProps:{strokeDasharray: number[], strokeDashoffset: number, stroke: string}[] = []
+  values.forEach((count, idx) => {
+    const offset = dashOffset
+    const strokeDashLength = count * circumference / total
+    dashOffset = dashOffset - strokeDashLength
+    pieProps.push({
+      strokeDasharray: [strokeDashLength, total - strokeDashLength],
+      strokeDashoffset: offset,
+      stroke: pieColor[idx]
+    })
+  })
+  return pieProps
 }
