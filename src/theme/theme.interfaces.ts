@@ -9,6 +9,11 @@ interface ColorTheme {
     shadow: string;
     textMain: string;
     textDim: string;
+    chart: {
+        red: string;
+        yellow: string;
+        green: string;
+    }
 }
 
 interface ThemeProviderProps {

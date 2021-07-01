@@ -11,6 +11,11 @@ const DARK_COLOR_THEME: ColorTheme = {
     textMain: '#fff',
     textDim: 'rgba(255, 255, 255, 0.5)',
     shadow: '#000',
+    chart: {
+        green: 'green',
+        red: 'red',
+        yellow: 'yellow'
+    }
 }
 
 const LIGHT_COLOR_THEME: ColorTheme = {
@@ -21,7 +26,12 @@ const LIGHT_COLOR_THEME: ColorTheme = {
     bg3: '#b8b8b8',
     textMain: 'rgba(0, 0, 0, 0.8)',
     textDim: 'rgba(0, 0, 0, 0.5)',
-    shadow: '#121212'
+    shadow: '#121212',
+    chart: {
+        green: 'green',
+        red: 'red',
+        yellow: 'yellow'
+    }
 }
 
 const DARK_THEME: Theme = {

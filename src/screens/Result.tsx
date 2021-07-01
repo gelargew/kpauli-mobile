@@ -6,18 +6,39 @@ import { StyledText, MainContainer } from '../components/commons'
 import { useThemeAwareObject } from '../theme/Theme.context'
 import { Theme } from '../theme/theme.interfaces'
 
+const getRowNums = (number: number) => Math.floor(Math.sqrt(number*0.7)/ 10)*10
 
 export const Result = () => {
-    const {results} = useContext(Storage)
+    const results = new Array(5000).fill(-1)
     const styles = useThemeAwareObject(createStyles)
+    const resultCount = results.reduce((accumulator, curValue) => {
+        accumulator[curValue + 1]++
+        return accumulator
+        // [wrong, empty, correct]
+    }, [0, 0, 0])
+    const pieData = [
+        {
+            color: 'red',
+            value: resultCount[0]
+        },
+        {
+            color: 'yellow',
+            value: resultCount[1]
+        },
+        {
+            color: 'green',
+            value: resultCount[2]
+        }
+    ]
+
     return (
         <MainContainer style={styles.mainContainer}>  
-            <StyledText style={styles.h1}>Result</StyledText>
+            <StyledText style={styles.h1}>{getRowNums(results.length)}</StyledText>
             <View style={styles.scatter}> 
                 <StyledText>yoa</StyledText>
-                <Scatter />
+                <Scatter results={results} numRows={getRowNums(results.length)} />
             </View>
-            <Pie />
+            <Pie data={pieData} />
             
         </MainContainer>
     )

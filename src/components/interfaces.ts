@@ -1,6 +1,17 @@
 import { PressableProps, ViewStyle, ViewProps, TextProps } from "react-native";
+import { CircleProps } from "react-native-svg";
 
-export { CustomButtonProps, MainContainerProps, NumpadProps, CustomTextProps, TimerProps }
+export { 
+    CustomButtonProps, 
+    MainContainerProps, 
+    NumpadProps, 
+    CustomTextProps, 
+    TimerProps,
+    PieProps,
+    PieCircleProps,
+    ScatterProps,
+    ScatterThickProps
+}
 
 
 
@@ -29,4 +40,31 @@ interface CustomTextProps extends TextProps {
 interface TimerProps extends CustomTextProps {
     performTimesUp?: Function,
     initialTime?: number,
+}
+
+
+// charts
+interface PieDataProps {
+    data: { value: number, color: string }[]
+}
+
+interface PieProps extends PieDataProps {
+    r?: number
+}
+
+interface PieCircleProps extends PieDataProps {
+    r: number,
+    total: number
+}
+
+interface ScatterProps {
+    results: number[],
+    scale?: number,
+    numRows?: number
+}
+
+interface ScatterThickProps {
+    value: number,
+    index: number,
+    numRows?: number
 }
