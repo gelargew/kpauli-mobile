@@ -8,7 +8,8 @@ export {
 
 const getRowNums = (number: number) => Math.floor(Math.sqrt(number*0.7)/ 10)*10
 
-const getPieCircleProps = ({data, r, total}: PieCircleProps) => {
+const getPieCircleProps = ({data, r}: PieCircleProps) => {
+    const total = data.reduce((total, obj) => total + obj.value, 0)
     const circumference = 2 * 3.1415927 * r
     let dashOffset = 0
     let pieProps:{

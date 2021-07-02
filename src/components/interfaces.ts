@@ -49,12 +49,12 @@ interface PieDataProps {
 }
 
 interface PieProps extends PieDataProps {
-    r?: number
+    r?: number,
+    scale?: number
 }
 
 interface PieCircleProps extends PieDataProps {
     r: number,
-    total: number
 }
 
 interface ScatterProps {

@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/core'
 import { MainContainer, StyledButton } from '../components/commons'
 import { Numpad } from '../components/Numpad'
 import { KpauliScreenProps, renderNumberProps } from './types'
-import { randomArray } from '../utils'
+import { randomArray } from '../utils/commons.utils'
 
 import { Timer } from '../components/Timer'
 import { Storage } from '../MainRoutes'

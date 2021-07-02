@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { randomArray } from "./utils";
+import { randomArray } from "./utils/commons.utils";
 
 export { storage, useStorage}
 

@@ -1,7 +1,13 @@
 import { StackNavigationProp } from "@react-navigation/stack"
 import { RouteProp } from "@react-navigation/native"
 
-export { StackParam, LandingScreenProps, KpauliScreenProps, renderNumberProps, LaunchScreenProps }
+export { 
+    StackParam, 
+    LandingScreenProps, 
+    KpauliScreenProps, 
+    renderNumberProps, 
+    LaunchScreenProps 
+}
 
 type StackParam ={
     Home: undefined,
