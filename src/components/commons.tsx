@@ -1,5 +1,6 @@
 import React from 'react'
 import { useMemo } from 'react'
+import { ViewProps } from 'react-native'
 import { TextProps, TextInput, TextInputProps, View, Pressable, Text } from 'react-native'
 import { color } from 'react-native-elements/dist/helpers'
 import { useTheme, useThemeAwareObject } from '../theme/Theme.context'
@@ -7,7 +8,7 @@ import { MainContainerProps, CustomButtonProps, CustomTextProps } from './interf
 
 
 
-export { StyledButton, MainContainer, Numpad, StyledText, PlainButton }
+export { StyledButton, MainContainer, Numpad, StyledText, PlainButton, PlainCard }
 
 const PlainButton = (props:CustomButtonProps) => {
     const {theme} = useTheme()
@@ -95,7 +96,22 @@ const Numpad = ({onPress}: {onPress?: () => void}) => {
 }
 
 
-const Input = (props:TextInputProps) => <TextInput {...props} />
+const PlainCard = (props: MainContainerProps) => {
+    const {theme} = useTheme()
+
+    return (
+        <View {...props} style={{
+            padding: 20,
+            borderRadius: 5,
+            shadowColor: theme.color.shadow,
+            backgroundColor: theme.color.bg1,
+            shadowOffset: {width: 4, height: 4},
+            shadowRadius: 5,
+            ...props.style
+        }} />
+    )
+}
+    
 
         
     

@@ -31,15 +31,16 @@ const Scatter = ({results, scale=1, numRows=30}:ScatterProps) => (
 )
 
 
-const Pie = ({r=50, data, scale=0.5}: PieProps) => {
-    const circleProps = useMemo(() => 
+const Pie = ({r=50, data, scale=0.7}: PieProps) => {
+    const circleProps = useMemo(() =>  
       getPieCircleProps({data, r}), [r])
-  
+    const position = useMemo(() => `${r/scale}%`, [scale, r])
+
     return (
-      <Svg fill='grey'>
-        <G scale={scale}>
+      <Svg width='150' height='150'>
+        <G  scale={scale}>
           {circleProps.map((props, idx) => 
-          <Circle key={idx} cx='50%' cy='50%' r={r} fill='transparent' {...props} strokeWidth={100} />)}
+          <Circle key={idx} cx={position} cy={position} r={r} fill='transparent' {...props} strokeWidth={100} />)}
         </G>
       </Svg>
     )

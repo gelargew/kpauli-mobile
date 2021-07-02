@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { View, Text } from 'react-native'
 import { Scatter, Pie } from '../components/Chart'
 import { Storage } from '../MainRoutes'
-import { StyledText, MainContainer } from '../components/commons'
+import { StyledText, MainContainer, PlainCard } from '../components/commons'
 import { useThemeAwareObject } from '../theme/Theme.context'
 import { Theme } from '../theme/theme.interfaces'
 import { getRowNums } from '../utils/chart.utils'
@@ -46,9 +46,9 @@ export const Result = () => {
     return (
         <MainContainer style={styles.mainContainer}>  
             <StyledText style={styles.h1}>{getRowNums(results.length)}</StyledText>
-            <View>
+            <PlainCard style={styles.pieContainer}>
                 <Pie data={pieData} />
-                <View>
+                <View style={{justifyContent: 'center'}}>
                     <StyledText>time: {time}</StyledText>
                     <StyledText>length: {length}</StyledText>
                     <StyledText>correct: {correct}</StyledText>
@@ -56,11 +56,11 @@ export const Result = () => {
                     <StyledText>empty: {empty}</StyledText>
                     <StyledText>answer changed: {answerChangedCount}</StyledText>
                 </View>
-            </View>
-            <View style={styles.scatter}> 
+            </PlainCard>
+            <PlainCard style={styles.scatter}> 
                 <StyledText>yoa</StyledText>
                 <Scatter results={results} numRows={getRowNums(results.length)} />
-            </View>
+            </PlainCard>
             
             
         </MainContainer>
