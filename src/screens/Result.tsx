@@ -5,11 +5,11 @@ import { Storage } from '../MainRoutes'
 import { StyledText, MainContainer } from '../components/commons'
 import { useThemeAwareObject } from '../theme/Theme.context'
 import { Theme } from '../theme/theme.interfaces'
+import { getRowNums } from '../utils/chart.utils'
 
-const getRowNums = (number: number) => Math.floor(Math.sqrt(number*0.7)/ 10)*10
 
 export const Result = () => {
-    const results = new Array(5000).fill(-1)
+    const {results} = useContext(Storage)
     const styles = useThemeAwareObject(createStyles)
     const resultCount = results.reduce((accumulator, curValue) => {
         accumulator[curValue + 1]++

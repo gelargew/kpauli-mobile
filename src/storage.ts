@@ -16,12 +16,7 @@ interface storage {
     launch: () => void;
     updateResults: (position: number, answer: number) => void; 
     updateAnswers: (position: number, answer: string) => void;
-}
-
-
-interface launch {
-    length: number,
-    time: number
+    answerChangedCount: number
 }
 
 const useStorage = () => {
@@ -69,5 +64,6 @@ const useStorage = () => {
         launch, 
         updateResults,
         updateAnswers,
+        answerChangedCount
     }
 }
