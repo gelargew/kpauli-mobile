@@ -1,27 +1,23 @@
 import React, { useContext } from 'react'
-import { View, Text } from 'react-native'
-import { Scatter, Pie } from '../components/Chart'
-import { Storage } from '../MainRoutes'
-import { StyledText, MainContainer, PlainCard } from '../components/commons'
+import { View } from 'react-native'
+import { useStorage } from '../storage'
+import { StyledText, MainContainer, PlainCard, StyledButton } from '../components/commons'
 import { useThemeAwareObject } from '../theme/Theme.context'
 import { Theme } from '../theme/theme.interfaces'
 import { getRowNums } from '../utils/chart.utils'
+import { Scatter, Pie } from '../components/Chart'
+import { useNavigation } from '@react-navigation/core'
 
 
 export const Result = () => {
-    const results = [
-        ...new Array(1000).fill(0), 
-        ...new Array(500).fill(-1),
-        ...new Array(1000).fill(1),
-        ...new Array(1000).fill(-1),
-        ...new Array(500).fill(0),
-        ...new Array(1000).fill(1)
-    ]
+    const navigation = useNavigation()
+    const results = new Array(100).fill(0)
+    
     const {
         answerChangedCount,
         length,
         time
-    } = useContext(Storage)
+    } = useStorage()
     const styles = useThemeAwareObject(createStyles)
     const [wrong, empty, correct] = results.reduce((accumulator, curValue) => {
         accumulator[curValue + 1]++
@@ -46,7 +42,8 @@ export const Result = () => {
     return (
         <MainContainer style={styles.mainContainer}>  
             <StyledText style={styles.h1}>{getRowNums(results.length)}</StyledText>
-            <PlainCard style={styles.pieContainer}>
+            <StyledButton onPress={() => navigation.navigate('Home')} title='back' />
+            {/* <PlainCard style={styles.pieContainer}>
                 <Pie data={pieData} />
                 <View style={{justifyContent: 'center'}}>
                     <StyledText>time: {time}</StyledText>
@@ -56,7 +53,7 @@ export const Result = () => {
                     <StyledText>empty: {empty}</StyledText>
                     <StyledText>answer changed: {answerChangedCount}</StyledText>
                 </View>
-            </PlainCard>
+            </PlainCard> */}
             <PlainCard style={styles.scatter}> 
                 <StyledText>yoa</StyledText>
                 <Scatter results={results} numRows={getRowNums(results.length)} />

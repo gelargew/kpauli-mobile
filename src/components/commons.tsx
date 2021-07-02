@@ -8,7 +8,7 @@ import { MainContainerProps, CustomButtonProps, CustomTextProps } from './interf
 
 
 
-export { StyledButton, MainContainer, Numpad, StyledText, PlainButton, PlainCard }
+export { StyledButton, MainContainer, StyledText, PlainButton, PlainCard }
 
 const PlainButton = (props:CustomButtonProps) => {
     const {theme} = useTheme()
@@ -79,20 +79,6 @@ const MainContainer = (props:MainContainerProps) => {
                     ...props.style
             }}>
             </View>
-}
-
-
-
-const Numpad = ({onPress}: {onPress?: () => void}) => {
-
-    return (
-        <View style={{flex: 1, minWidth: 300, flexWrap: 'wrap', flexDirection: 'row', marginBottom: 10, borderRadius: 5}}>
-            {[1,2,3,4,5,6,7,8,9].map(num => {
-                return <StyledButton style={{width:'32%', height: '24%',  margin: 'auto', backgroundColor: 'grey'}} fontSize={36} onPress={() => console.log(num)} title={num.toString()}/>
-            })}
-
-        </View>
-    )
 }
 
 

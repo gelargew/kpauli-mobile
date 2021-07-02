@@ -7,15 +7,16 @@ import { Kpauli } from './screens/Kpauli'
 import { LandingScreen } from './screens/LandingScreen'
 import { Launch } from './screens/Launch'
 import { Result } from './screens/Result'
-import { useStorage, storage } from './storage'
+import { useCreateStorage, Storage } from './storage'
 
-export { Storage, MainRoutes}
+export { MainRoutes }
 
 const Stack = createStackNavigator<StackParam>()
-const Storage = React.createContext<storage>(null!)
+
 
 const MainRoutes = () => {
-    const storage = useStorage()
+    const storage = useCreateStorage()
+    const a = 23
 
     return (
         <Storage.Provider value={storage}>

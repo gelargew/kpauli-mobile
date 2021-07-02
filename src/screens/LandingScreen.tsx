@@ -19,7 +19,7 @@ export const LandingScreen = ({navigation}:LandingScreenProps) => {
             <LogoMain />
             <View style={styles.container}>
                 <StyledText style={styles.button}>HALLO</StyledText>
-                <StyledButton fontSize={24} title='START' onPress={() => navigation.navigate('Launch')} />
+                <StyledButton fontSize={24} title='START' onPress={() => navigation.navigate('Result')} />
                 <StyledButton fontSize={24} title='RESULT' onPress={toggleTheme} />
                 <StyledButton fontSize={24} title='testbutton' onPress={() => {}} />
             </View>

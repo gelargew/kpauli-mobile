@@ -1,14 +1,11 @@
 import React, { PureComponent, useContext, useLayoutEffect, useRef, useState } from 'react'
 import { FlatList, Text, View, useWindowDimensions, StyleSheet, Alert } from 'react-native'
-import { useNavigation } from '@react-navigation/core'
 
 import { MainContainer, StyledButton } from '../components/commons'
 import { Numpad } from '../components/Numpad'
 import { KpauliScreenProps, renderNumberProps } from './types'
-import { randomArray } from '../utils/commons.utils'
-
 import { Timer } from '../components/Timer'
-import { Storage } from '../MainRoutes'
+import { useStorage } from '../storage'
 import { useEffect } from 'react'
 
 
@@ -30,7 +27,7 @@ export const Kpauli = ({route, navigation}: KpauliScreenProps) => {
         position,
         setPosition,
         updateAnswers
-    } = useContext(Storage)
+    } = useStorage()
     const numbersRef = useRef<FlatList>(null!)
     const [NumpadDisabled, setNumpadDisabled] = useState(false)
 
