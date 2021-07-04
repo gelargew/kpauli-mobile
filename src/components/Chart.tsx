@@ -1,10 +1,7 @@
-import React, { useContext, useMemo } from 'react'
-import { View, FlatList } from 'react-native'
-import { Storage } from '../MainRoutes'
+import React, { useContext, useLayoutEffect, useMemo, useState } from 'react'
 import Svg, { Circle, Rect, G } from 'react-native-svg'
 import { PieCircleProps, PieProps, ScatterProps, ScatterThickProps } from './interfaces'
 import { getPieCircleProps, getScatterThickColor } from '../utils/chart.utils'
-import { sumArray } from '../utils/commons.utils'
 
 export { Scatter, Pie }
 
@@ -21,14 +18,28 @@ const ScatterThick = ({ value, index, numRows=10 }: ScatterThickProps) => {
 }
 
 
-const Scatter = ({results, scale=1, numRows=30}:ScatterProps) => (
+const Scatter = ({results, scale=1, numRows=30}:ScatterProps) => {
+  const [isLoading, setIsLoading] = useState(true)
+  useLayoutEffect(() => {
+    setTimeout(() => setIsLoading(false), 100)
+  }, [])
+
+  return (
     <Svg width='100%' height='100%' >
         <G scale={scale*3}>
+          {isLoading
+          ?
+          <Circle cx='50' cy='50' r='50' fill='teal' />
+          :
+          <>
             {results.map((value, index) => 
               <ScatterThick key={index} value={value} index={index} numRows={Math.floor(numRows)} />)}
+          </>
+          }
+            
         </G>      
     </Svg>
-)
+)}
 
 
 const Pie = ({r=50, data, scale=0.7}: PieProps) => {

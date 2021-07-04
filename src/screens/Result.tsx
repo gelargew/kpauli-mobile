@@ -1,27 +1,30 @@
 import React, { useContext } from 'react'
 import { View, Text } from 'react-native'
 import { Scatter, Pie } from '../components/Chart'
-import { Storage } from '../MainRoutes'
-import { StyledText, MainContainer, PlainCard } from '../components/commons'
+import { StyledText, MainContainer, PlainCard, StyledButton } from '../components/commons'
 import { useThemeAwareObject } from '../theme/Theme.context'
 import { Theme } from '../theme/theme.interfaces'
 import { getRowNums } from '../utils/chart.utils'
+import { useNavigation } from '@react-navigation/native'
+import { ResultScreenProps } from './types'
+import { useStorage } from '../storage'
 
 
-export const Result = () => {
-    const results = [
-        ...new Array(1000).fill(0), 
-        ...new Array(500).fill(-1),
-        ...new Array(1000).fill(1),
-        ...new Array(1000).fill(-1),
-        ...new Array(500).fill(0),
-        ...new Array(1000).fill(1)
-    ]
+export const Result = ({navigation}: ResultScreenProps) => {
+    // const results = [
+    //     ...new Array(1000).fill(0), 
+    //     ...new Array(500).fill(-1),
+    //     ...new Array(1000).fill(1),
+    //     ...new Array(1000).fill(-1),
+    //     ...new Array(500).fill(0),
+    //     ...new Array(1000).fill(1)
+    // ]
     const {
         answerChangedCount,
         length,
-        time
-    } = useContext(Storage)
+        time,
+        results
+    } = useStorage()
     const styles = useThemeAwareObject(createStyles)
     const [wrong, empty, correct] = results.reduce((accumulator, curValue) => {
         accumulator[curValue + 1]++
@@ -61,7 +64,7 @@ export const Result = () => {
                 <StyledText>yoa</StyledText>
                 <Scatter results={results} numRows={getRowNums(results.length)} />
             </PlainCard>
-            
+            <StyledButton title='Home' onPress={() => navigation.popToTop()} />
             
         </MainContainer>
     )

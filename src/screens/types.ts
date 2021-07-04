@@ -6,7 +6,8 @@ export {
     LandingScreenProps, 
     KpauliScreenProps, 
     renderNumberProps, 
-    LaunchScreenProps 
+    LaunchScreenProps,
+    ResultScreenProps
 }
 
 type StackParam ={
@@ -32,6 +33,10 @@ type KpauliScreenProps = {
 
 type LaunchScreenProps = {
     navigation: StackNavigationProp<StackParam, 'Launch'>
+}
+
+type ResultScreenProps = {
+    navigation: StackNavigationProp<StackParam, 'Result'>
 }
 
 type renderNumberProps = {

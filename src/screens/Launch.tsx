@@ -4,10 +4,10 @@ import { MainContainer, StyledButton, StyledText } from '../components/commons'
 import { Slider } from 'react-native-elements'
 import { LaunchScreenProps } from './types'
 import { useContext } from 'react'
-import { Storage } from '../MainRoutes'
+import { useStorage } from '../storage'
 
 export const Launch = ({navigation}:LaunchScreenProps) => {
-    const {launch, time, length, setLength, setTime} = useContext(Storage)
+    const {launch, time, length, setLength, setTime} = useStorage()
 
     const handleStart = () => {
         launch()

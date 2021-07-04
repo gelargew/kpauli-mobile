@@ -8,8 +8,8 @@ import { KpauliScreenProps, renderNumberProps } from './types'
 import { randomArray } from '../utils/commons.utils'
 
 import { Timer } from '../components/Timer'
-import { Storage } from '../MainRoutes'
 import { useEffect } from 'react'
+import { useStorage } from '../storage'
 
 
 class RenderNumber extends PureComponent<renderNumberProps> {
@@ -30,7 +30,7 @@ export const Kpauli = ({route, navigation}: KpauliScreenProps) => {
         position,
         setPosition,
         updateAnswers
-    } = useContext(Storage)
+    } = useStorage()
     const numbersRef = useRef<FlatList>(null!)
     const [NumpadDisabled, setNumpadDisabled] = useState(false)
 

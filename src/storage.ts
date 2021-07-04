@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { randomArray } from "./utils/commons.utils";
 
-export { storage, useStorage}
+export { Storage, storage, useStorage, useCreateStorage}
 
 interface storage { 
     length: number; 
@@ -19,12 +19,19 @@ interface storage {
     answerChangedCount: number
 }
 
-const useStorage = () => {
+const useCreateStorage = () => {
     const [length, setLength] = useState(1000)
     const [time, setTime] = useState(20)
     const [numbers, setNumber] = useState<number[]>([])
     const [answers, setAnswers] = useState<string[]>([])
-    const [results, setResults] = useState<number[]>([])
+    const [results, setResults] = useState<number[]>([
+        ...new Array(1000).fill(0), 
+        ...new Array(500).fill(-1),
+        ...new Array(1000).fill(1),
+        ...new Array(1000).fill(-1),
+        ...new Array(500).fill(0),
+        ...new Array(1000).fill(1)
+    ])
     const [position, setPosition] = useState(0)
     const [answerChangedCount, setAnswerChangedCount] = useState(0)
 
@@ -67,3 +74,7 @@ const useStorage = () => {
         answerChangedCount
     }
 }
+
+const Storage = React.createContext<storage>(null!)
+
+const useStorage = () => useContext(Storage)

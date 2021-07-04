@@ -7,20 +7,20 @@ import { Kpauli } from './screens/Kpauli'
 import { LandingScreen } from './screens/LandingScreen'
 import { Launch } from './screens/Launch'
 import { Result } from './screens/Result'
-import { useStorage, storage } from './storage'
+import { useCreateStorage, Storage } from './storage'
 
-export { Storage, MainRoutes}
+export { MainRoutes }
 
 const Stack = createStackNavigator<StackParam>()
-const Storage = React.createContext<storage>(null!)
+
 
 const MainRoutes = () => {
-    const storage = useStorage()
+    const storage = useCreateStorage()
 
     return (
         <Storage.Provider value={storage}>
             <NavigationContainer theme={DarkTheme}>
-                <Stack.Navigator headerMode='none' initialRouteName='Result'>
+                <Stack.Navigator headerMode='none' initialRouteName='Home'>
                     <Stack.Screen name='Home' component={LandingScreen} />
                     <Stack.Screen name='Launch' component={Launch} />
                     <Stack.Screen name='Kpauli' component={Kpauli} />
