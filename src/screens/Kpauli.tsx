@@ -38,24 +38,6 @@ export const Kpauli = ({route, navigation}: KpauliScreenProps) => {
         setTimeout(() => numbersRef.current.scrollToOffset({offset: position * 100}), 100)
     }, [position])
 
-    useEffect(() => navigation.addListener('beforeRemove', e => {
-        e.preventDefault()
-        Alert.alert('Discard changes?',
-        'You have unsaved changes. Are you sure to discard them and leave the screen?',
-        [
-          { text: "Don't leave", style: 'cancel', onPress: () => {} },
-          {
-            text: 'Discard',
-            style: 'destructive',
-            // If the user confirmed, then we dispatch the action we blocked earlier
-            // This will continue the action that had triggered the removal of the screen
-            onPress: () => navigation.dispatch(e.data.action),
-          },
-        ]
-      );
-    }), [])
-
-
     const renderNumber = ({item, index}:any) => 
         <RenderNumber item={item} index={index} numbers={numbers} />
        

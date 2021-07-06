@@ -63,7 +63,10 @@ const StyledButton = (props:CustomButtonProps) => {
 
 const StyledText = (props:CustomTextProps) => {
     const {theme} = useTheme()
-    return <Text {...props} style={{color: theme.color.textMain, ...props.style}} />
+    return <Text {...props} style={{
+        alignSelf: 'center', 
+        color: theme.color.textMain, 
+        ...props.style}} />
 }
 
 const MainContainer = (props:MainContainerProps) => {

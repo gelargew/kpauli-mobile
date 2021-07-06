@@ -7,14 +7,16 @@ export {
     KpauliScreenProps, 
     renderNumberProps, 
     LaunchScreenProps,
-    ResultScreenProps
+    ResultScreenProps,
+    LoadingScreenProps,
 }
 
 type StackParam ={
     Home: undefined,
     Kpauli: any,
     Launch: undefined,
-    Result: undefined
+    Result: undefined,
+    Loading: undefined
 }
 
 type LandingScreenProps = {
@@ -37,6 +39,10 @@ type LaunchScreenProps = {
 
 type ResultScreenProps = {
     navigation: StackNavigationProp<StackParam, 'Result'>
+}
+
+type LoadingScreenProps = {
+    navigation: StackNavigationProp<StackParam, 'Loading'>
 }
 
 type renderNumberProps = {
