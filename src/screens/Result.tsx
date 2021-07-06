@@ -1,11 +1,10 @@
-import React, { useContext } from 'react'
-import { View, Text } from 'react-native'
+import React from 'react'
+import { View } from 'react-native'
 import { Scatter, Pie } from '../components/Chart'
 import { StyledText, MainContainer, PlainCard, StyledButton } from '../components/commons'
 import { useThemeAwareObject } from '../theme/Theme.context'
 import { Theme } from '../theme/theme.interfaces'
 import { getRowNums } from '../utils/chart.utils'
-import { useNavigation } from '@react-navigation/native'
 import { ResultScreenProps } from './types'
 import { useStorage } from '../storage'
 
