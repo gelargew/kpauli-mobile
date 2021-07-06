@@ -6,6 +6,7 @@ import { Theme } from '../theme/theme.interfaces'
 import { StyledButton, MainContainer, StyledText } from '../components/commons'
 import { LogoMain } from '../components/icons'
 import { LandingScreenProps } from './types'
+import { AnimatedLogo } from '../components/AnimatedLogo'
 
 
 
@@ -17,6 +18,9 @@ export const LandingScreen = ({navigation}:LandingScreenProps) => {
     return (
         <MainContainer>
             <LogoMain />
+            <View style={styles.background}>
+                <AnimatedLogo />
+            </View>
             <View style={styles.container}>
                 <StyledText style={styles.button}>HALLO</StyledText>
                 <StyledButton fontSize={24} title='START' onPress={() => navigation.navigate('Launch')} />
@@ -33,7 +37,11 @@ const createStyle = (theme:Theme) => {
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: theme.color.bg1,
-            minWidth: 200
+            minWidth: 200,
+            zIndex: 1
+        },
+        background: {
+            marginBottom: 20
         }
         
     })
