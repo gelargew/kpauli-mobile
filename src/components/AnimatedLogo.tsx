@@ -3,11 +3,11 @@ import { useEffect } from 'react'
 import { Easing, StyleProp, StyleSheet, ViewStyle } from 'react-native'
 import { Animated } from 'react-native'
 import {View} from 'react-native'
-import { getRandomInt, randomArray } from '../utils/commons.utils'
+import { getRandomInt, keyGenerator, randomArray } from '../utils/commons.utils'
 import { StyledText } from './commons'
 import { ContainerProps } from './interfaces'
 
-
+const animatedLogoKey = keyGenerator('animatedLogo')
 
 export const AnimatedLogo = () => {
     const r1Y = useRef(new Animated.Value(0)).current
@@ -88,7 +88,7 @@ const AnimatedView = (props: ContainerProps) => {
                 <StyledText style={{ fontSize: 28 }}>{top}</StyledText>
             </View>
             {middle.map(num => (
-                <View style={styles.number} key={num}>
+                <View style={styles.number} key={animatedLogoKey.next().value}>
                     <StyledText style={{ fontSize: 28 }}>{num}</StyledText>
                 </View>
             ))}

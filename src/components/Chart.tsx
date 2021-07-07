@@ -19,25 +19,15 @@ const ScatterThick = ({ value, index, numRows=10 }: ScatterThickProps) => {
 
 
 const Scatter = ({results, scale=1, numRows=30}:ScatterProps) => {
-  const [isLoading, setIsLoading] = useState(true)
-  useLayoutEffect(() => {
-    setTimeout(() => setIsLoading(false), 100)
-  }, [])
 
   return (
-    <Svg width='100%' height='100%' >
-        <G scale={scale*3}>
-          {isLoading
-          ?
-          <Circle cx='50' cy='50' r='50' fill='teal' />
-          :
-          <>
-            {results.map((value, index) => 
-              <ScatterThick key={index} value={value} index={index} numRows={Math.floor(numRows)} />)}
-          </>
-          }
-            
-        </G>      
+    <Svg width='200' height='150' >
+        <G scale={scale*2}>
+          
+        {results.map((value, index) => 
+            <ScatterThick key={index} value={value} index={index} numRows={Math.floor(numRows)} />)}
+                   
+        </G>     
     </Svg>
 )}
 

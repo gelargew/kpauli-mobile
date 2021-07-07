@@ -36,7 +36,6 @@ const createStyle = (theme:Theme) => {
         container: {
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: theme.color.bg1,
             minWidth: 200,
             zIndex: 1
         },

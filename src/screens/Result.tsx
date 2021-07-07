@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import { View } from 'react-native'
 import { Scatter, Pie } from '../components/Chart'
 import { StyledText, MainContainer, PlainCard, StyledButton } from '../components/commons'
@@ -10,19 +10,14 @@ import { useStorage } from '../storage'
 
 
 export const Result = ({navigation}: ResultScreenProps) => {
-    // const results = [
-    //     ...new Array(1000).fill(0), 
-    //     ...new Array(500).fill(-1),
-    //     ...new Array(1000).fill(1),
-    //     ...new Array(1000).fill(-1),
-    //     ...new Array(500).fill(0),
-    //     ...new Array(1000).fill(1)
-    // ]
+    const [loadScatter, setLoadScatter] = useState(false)
+    const results = [
+        ...new Array(5000).fill(-1),
+    ]
     const {
         answerChangedCount,
         length,
-        time,
-        results
+        time
     } = useStorage()
     const styles = useThemeAwareObject(createStyles)
     const [wrong, empty, correct] = results.reduce((accumulator, curValue) => {
@@ -45,10 +40,16 @@ export const Result = ({navigation}: ResultScreenProps) => {
         }
     ]
 
+    useLayoutEffect(() => {
+        setTimeout(() => setLoadScatter(true), 1000)
+        return setLoadScatter(false)
+    }, [])
+
+    const scatterScale = results.length > 3000 ? 1 : 2
     return (
         <MainContainer style={styles.mainContainer}>  
             <StyledText style={styles.h1}>{getRowNums(results.length)}</StyledText>
-            <PlainCard style={styles.pieContainer}>
+            {/* <PlainCard style={styles.pieContainer}>
                 <Pie data={pieData} />
                 <View style={{justifyContent: 'center'}}>
                     <StyledText>time: {time}</StyledText>
@@ -58,10 +59,15 @@ export const Result = ({navigation}: ResultScreenProps) => {
                     <StyledText>empty: {empty}</StyledText>
                     <StyledText>answer changed: {answerChangedCount}</StyledText>
                 </View>
-            </PlainCard>
+            </PlainCard> */}
             <PlainCard style={styles.scatter}> 
-                <StyledText>yoa</StyledText>
+                {loadScatter
+                ?
                 <Scatter results={results} numRows={getRowNums(results.length)} />
+                :
+                <StyledText>loading...</StyledText>
+                }
+                
             </PlainCard>
             <StyledButton title='Home' onPress={() => navigation.popToTop()} />
             
