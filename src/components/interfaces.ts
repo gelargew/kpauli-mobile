@@ -65,7 +65,7 @@ interface ScatterProps {
 }
 
 interface ScatterThickProps {
-    value: number,
+    data: any,
     index: number,
     numRows?: number
 }

@@ -3,10 +3,15 @@ import { PieCircleProps } from "../components/interfaces"
 export {
     getPieCircleProps,
     getScatterThickColor,
-    getRowNums
+    getRowNums,
+    reshapeScatterData
 }
 
-const getRowNums = (number: number) => Math.floor(Math.sqrt(number*0.7)/ 10)*10 | 10
+const getRowNums = (number: number) => {
+  const row = Math.floor(Math.sqrt(number*0.7)/ 10)*10
+  if (row === 10 && number > 300) return 20
+  return row || 10
+}
 
 const getPieCircleProps = ({data, r}: PieCircleProps) => {
     const total = data.reduce((total, obj) => total + obj.value, 0)
@@ -35,4 +40,34 @@ const getScatterThickColor = (value:number) => {
     if (value === 0) return 'yellow'
     if (value === -1) return 'red'
     return 'grey'
+}
+
+const reshapeScatterData = (results: number[], rows=10) => {
+    let data: any[] = []   
+
+    data.push(results.reduce((prev, cur, idx) => {
+      if (prev.y + prev.height > rows) {
+        data.push(prev)
+        return { 
+          value: cur, 
+          height: 1, 
+          y: 1, 
+          x: prev.x + 1
+        }
+      }    
+      if (prev.value != cur) {
+        data.push(prev)
+        return { 
+          value: cur, 
+          height: 1, 
+          y: prev.y + prev.height, 
+          x: prev.x 
+        }
+      }    
+      prev.height++
+      return prev
+     
+    }, {value: 0, height: 0, y: 1, x: 1}))
+
+    return data
 }

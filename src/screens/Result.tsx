@@ -12,7 +12,24 @@ import { useStorage } from '../storage'
 export const Result = ({navigation}: ResultScreenProps) => {
     const [loadScatter, setLoadScatter] = useState(false)
     const results = [
-        ...new Array(5000).fill(-1),
+        ...new Array(300).fill(-1),
+        ...new Array(300).fill(0),
+        ...new Array(300).fill(1),
+        ...new Array(300).fill(1),
+        ...new Array(300).fill(-1),
+        ...new Array(300).fill(1),
+        ...new Array(300).fill(-1),
+        ...new Array(300).fill(0),
+        ...new Array(300).fill(-1),
+        ...new Array(300).fill(-1),
+        ...new Array(300).fill(1),
+        ...new Array(300).fill(-1),
+        ...new Array(300).fill(0),
+        ...new Array(300).fill(-1),
+        ...new Array(300).fill(0),
+        ...new Array(300).fill(-1),
+        ...new Array(300).fill(1),
+        ...new Array(300).fill(-1),
     ]
     const {
         answerChangedCount,

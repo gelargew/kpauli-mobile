@@ -1,17 +1,17 @@
 import React, { useContext, useLayoutEffect, useMemo, useState } from 'react'
 import Svg, { Circle, Rect, G } from 'react-native-svg'
 import { PieCircleProps, PieProps, ScatterProps, ScatterThickProps } from './interfaces'
-import { getPieCircleProps, getScatterThickColor } from '../utils/chart.utils'
+import { getPieCircleProps, getScatterThickColor, reshapeScatterData } from '../utils/chart.utils'
 
 export { Scatter, Pie }
 
 
-const ScatterThick = ({ value, index, numRows=10 }: ScatterThickProps) => {
+const ScatterThick = ({ data, index }: ScatterThickProps) => {
     const props = {
-        y: index % numRows,
-        x: Math.floor(index/numRows),
-        fill: getScatterThickColor(value),
-        height: '1',
+        y: data.y,
+        x: data.x,
+        fill: getScatterThickColor(data.value),
+        height: data.height,
         width: '1'
     }
     return <Rect {...props} />
@@ -19,13 +19,15 @@ const ScatterThick = ({ value, index, numRows=10 }: ScatterThickProps) => {
 
 
 const Scatter = ({results, scale=1, numRows=30}:ScatterProps) => {
+  const data = reshapeScatterData(results, numRows)
+  console.log(data)
 
   return (
     <Svg width='200' height='150' >
         <G scale={scale*2}>
           
-        {results.map((value, index) => 
-            <ScatterThick key={index} value={value} index={index} numRows={Math.floor(numRows)} />)}
+        {data.map((dat, index) => 
+            <ScatterThick key={index} data={dat} index={index} />)}
                    
         </G>     
     </Svg>
