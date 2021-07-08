@@ -41,6 +41,7 @@ const useCreateStorage = () => {
         setTime(t)
         setNumber(randomArray({length: l}))
         setAnswers(new Array(l).fill(''))
+        setPosition(0)
     }
     const updateAnswers = (position:number, answer:string) => {
         setAnswers(prev => {

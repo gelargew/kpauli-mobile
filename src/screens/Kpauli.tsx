@@ -2,7 +2,7 @@ import React, { PureComponent, useContext, useLayoutEffect, useRef, useState } f
 import { FlatList, Text, View, useWindowDimensions, StyleSheet, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
 
-import { MainContainer, StyledButton } from '../components/commons'
+import { MainContainer, StyledButton, StyledText } from '../components/commons'
 import { Numpad } from '../components/Numpad'
 import { KpauliScreenProps, renderNumberProps } from './types'
 import { randomArray } from '../utils/commons.utils'
@@ -16,8 +16,8 @@ class RenderNumber extends PureComponent<renderNumberProps> {
     render() {
         return (
         <View key={this.props.index}>
-            <Text style={styles.number}>{this.props.numbers[this.props.index]}</Text>
-            <Text style={styles.number}>{this.props.item}</Text>
+            <StyledText style={styles.number}>{this.props.numbers[this.props.index]}</StyledText>
+            <StyledText style={styles.number}>{this.props.item}</StyledText>
         </View>)
     }
 }
@@ -77,7 +77,9 @@ export const Kpauli = ({route, navigation}: KpauliScreenProps) => {
                     keyExtractor={(i, idx) => idx.toString()} 
                     scrollEnabled={false}
                     renderItem={renderNumber}
-                    removeClippedSubviews={true} />
+                    removeClippedSubviews={true}
+                    showsVerticalScrollIndicator={false}
+                    />
                 </View>
             </View>
             <Numpad disabled={NumpadDisabled} onPress={handlePress} />
@@ -95,7 +97,6 @@ const styles = StyleSheet.create({
         paddingTop: 50
     },
     number: {
-        color: 'white',
         height: 50,
         fontSize: 36,
         alignItems: 'center'

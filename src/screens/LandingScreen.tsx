@@ -22,10 +22,9 @@ export const LandingScreen = ({navigation}:LandingScreenProps) => {
                 <AnimatedLogo />
             </View>
             <View style={styles.container}>
-                <StyledText style={styles.button}>HALLO</StyledText>
-                <StyledButton fontSize={24} title='START' onPress={() => navigation.navigate('Launch')} />
-                <StyledButton fontSize={24} title='RESULT' onPress={toggleTheme} />
-                <StyledButton fontSize={24} title='testbutton' onPress={() => {}} />
+                <StyledButton style={styles.button} fontSize={24} title='START' onPress={() => navigation.navigate('Launch')} />
+                <StyledButton style={styles.button} fontSize={24} title='RESULT' onPress={toggleTheme} />
+                <StyledButton style={styles.button} fontSize={24} title='testbutton' onPress={() => {}} />
             </View>
         </MainContainer>
     )
@@ -41,6 +40,9 @@ const createStyle = (theme:Theme) => {
         },
         background: {
             marginBottom: 20
+        },
+        button: {
+            minWidth: 180
         }
         
     })

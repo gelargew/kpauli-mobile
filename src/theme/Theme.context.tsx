@@ -36,7 +36,7 @@ const ThemeProvider = React.memo((props:ThemeProviderProps) => {
 
 const useTheme = () => useContext(Context)
 
-const useThemeAwareObject = (createStyle: (theme:Theme) => any) => {
+const useThemeAwareObject = (createStyle: (theme:Theme, ...args: any) => any) => {
     const {theme} = useTheme()
 
     const themeAwareObject = useMemo(() => createStyle(theme)

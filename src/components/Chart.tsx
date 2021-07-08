@@ -2,6 +2,7 @@ import React, { useContext, useLayoutEffect, useMemo, useState } from 'react'
 import Svg, { Circle, Rect, G } from 'react-native-svg'
 import { PieCircleProps, PieProps, ScatterProps, ScatterThickProps } from './interfaces'
 import { getPieCircleProps, getScatterThickColor, reshapeScatterData } from '../utils/chart.utils'
+import { useWindowDimensions } from 'react-native'
 
 export { Scatter, Pie }
 
@@ -20,10 +21,11 @@ const ScatterThick = ({ data, index }: ScatterThickProps) => {
 
 const Scatter = ({results, scale=1, numRows=30}:ScatterProps) => {
   const data = reshapeScatterData(results, numRows)
-  const scaler = 140 / (Math.sqrt(results.length))
+  const scaler = 180 / (Math.sqrt(results.length))
+  const deviceWidth = useWindowDimensions().width
 
   return (
-    <Svg width='200' height='150' >
+    <Svg width={deviceWidth - 50} height='150' >
         <G scale={scaler}>
           
         {data.map((dat, index) => 
