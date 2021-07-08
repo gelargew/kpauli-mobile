@@ -12,24 +12,8 @@ import { useStorage } from '../storage'
 export const Result = ({navigation}: ResultScreenProps) => {
     const [loadScatter, setLoadScatter] = useState(false)
     const results = [
-        ...new Array(300).fill(-1),
-        ...new Array(300).fill(0),
-        ...new Array(300).fill(1),
-        ...new Array(300).fill(1),
-        ...new Array(300).fill(-1),
-        ...new Array(300).fill(1),
-        ...new Array(300).fill(-1),
-        ...new Array(300).fill(0),
-        ...new Array(300).fill(-1),
-        ...new Array(300).fill(-1),
-        ...new Array(300).fill(1),
-        ...new Array(300).fill(-1),
-        ...new Array(300).fill(0),
-        ...new Array(300).fill(-1),
-        ...new Array(300).fill(0),
-        ...new Array(300).fill(-1),
-        ...new Array(300).fill(1),
-        ...new Array(300).fill(-1),
+        ...new Array(700).fill(-1),
+        ...new Array(300).fill(0)
     ]
     const {
         answerChangedCount,
@@ -64,9 +48,10 @@ export const Result = ({navigation}: ResultScreenProps) => {
 
     const scatterScale = results.length > 3000 ? 1 : 2
     return (
-        <MainContainer style={styles.mainContainer}>  
+        <MainContainer style={styles.mainContainer}> 
+             
             <StyledText style={styles.h1}>{getRowNums(results.length)}</StyledText>
-            {/* <PlainCard style={styles.pieContainer}>
+            <PlainCard style={styles.pieContainer}>
                 <Pie data={pieData} />
                 <View style={{justifyContent: 'center'}}>
                     <StyledText>time: {time}</StyledText>
@@ -76,7 +61,7 @@ export const Result = ({navigation}: ResultScreenProps) => {
                     <StyledText>empty: {empty}</StyledText>
                     <StyledText>answer changed: {answerChangedCount}</StyledText>
                 </View>
-            </PlainCard> */}
+            </PlainCard>
             <PlainCard style={styles.scatter}> 
                 {loadScatter
                 ?
@@ -86,25 +71,28 @@ export const Result = ({navigation}: ResultScreenProps) => {
                 }
                 
             </PlainCard>
-            <StyledButton title='Home' onPress={() => navigation.popToTop()} />
-            
+            <View style={styles.navigation}>
+                <StyledButton title='Home' onPress={() => navigation.popToTop()} />
+                <StyledButton title='Play again' onPress={() => navigation.replace('Launch')} />
+            </View>      
         </MainContainer>
     )
 }
 
 const createStyles = (theme:Theme) => ({
     mainContainer: {
-        paddingTop: 50,
-        paddingBottom: 50,
-        justifyContent: 'space-around'
+        padding: 5,
+        justifyContent: 'space-around',
+        overflow: 'scroll'
     },
     scatter: {
         alignItems: 'center',
         justifyContent: 'center',
-        minWidth: 200,
+        width: '100%',
         backgroundColor: theme.color.bg1,
         borderRadius: 5,
-        shadowColor: theme.color.shadow
+        shadowColor: theme.color.shadow,
+        maxWidth: 400
     },
     h1: {
         fontSize: 36,
@@ -112,5 +100,13 @@ const createStyles = (theme:Theme) => ({
     pieContainer: {
         flexDirection: 'row',
         flexWrap: 'wrap',
+        width: '100%',
+        maxWidth: 400
+    },
+    navigation: {
+        flexDirection: 'row',
+        width: '100%',
+        maxWidth: 400,
+        justifyContent: 'space-between'
     }
 })

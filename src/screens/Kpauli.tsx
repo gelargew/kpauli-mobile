@@ -58,7 +58,7 @@ export const Kpauli = ({route, navigation}: KpauliScreenProps) => {
         if (position < numbers.length) setPosition(prev => prev + 1)
     }
     const handleSubmit = () => {
-        navigation.navigate('Result')
+        navigation.replace('Result')
     }
 
     return (

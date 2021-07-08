@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { LearnMoreLinks } from "react-native/Libraries/NewAppScreen";
 import { randomArray } from "./utils/commons.utils";
 
 export { Storage, storage, useStorage, useCreateStorage}
@@ -13,7 +14,7 @@ interface storage {
     setTime: React.Dispatch<React.SetStateAction<number>>,
     setLength: React.Dispatch<React.SetStateAction<number>>,
     setPosition: React.Dispatch<React.SetStateAction<number>>;
-    launch: () => void;
+    launch: (t:number, l:number) => void;
     updateResults: (position: number, answer: number) => void; 
     updateAnswers: (position: number, answer: string) => void;
     answerChangedCount: number
@@ -35,11 +36,11 @@ const useCreateStorage = () => {
     const [position, setPosition] = useState(0)
     const [answerChangedCount, setAnswerChangedCount] = useState(0)
 
-    const launch = ()  => {
-        setLength(length)
-        setTime(time)
-        setNumber(randomArray({length: length}))
-        setAnswers(new Array(length).fill(''))
+    const launch = (t=20, l=2000)  => {
+        setLength(l)
+        setTime(t)
+        setNumber(randomArray({length: l}))
+        setAnswers(new Array(l).fill(''))
     }
     const updateAnswers = (position:number, answer:string) => {
         setAnswers(prev => {

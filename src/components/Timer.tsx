@@ -10,9 +10,12 @@ const useTimer = (initialTime=600, performTimesUp?:Function) => {
 
     useEffect(() => {
         if (time > 0 ) {
-            setTimeout(() => {
+            const timer = setTimeout(() => {
                 setTime(prev => prev - 1)
             }, 1000)
+            return () => {
+                clearTimeout(timer)
+            }
         }
         else if (performTimesUp) performTimesUp()
     }, [time])

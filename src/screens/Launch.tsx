@@ -7,16 +7,12 @@ import { useContext } from 'react'
 import { useStorage } from '../storage'
 
 export const Launch = ({navigation}:LaunchScreenProps) => {
-    const {
-        launch, 
-        time, 
-        length, 
-        setLength, 
-        setTime
-    } = useStorage()
+    const {launch} = useStorage()
+    const [time, setTime] = useState(20)
+    const [length, setLength] = useState(2000)
 
     const handleStart = () => {
-        launch()
+        launch(time, length)
         navigation.navigate('Kpauli')
     }
 

@@ -19,7 +19,7 @@ const MainRoutes = () => {
 
     return (       
         <NavigationContainer theme={DarkTheme}>
-            <Stack.Navigator headerMode='none' initialRouteName='Result'>
+            <Stack.Navigator headerMode='none' initialRouteName='Home'>
                 <Stack.Screen name='Home' component={LandingScreen} />
                 <Stack.Screen name='Launch' component={Launch} />
                 <Stack.Screen name='Kpauli' component={Kpauli} />

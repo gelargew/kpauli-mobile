@@ -20,11 +20,11 @@ const ScatterThick = ({ data, index }: ScatterThickProps) => {
 
 const Scatter = ({results, scale=1, numRows=30}:ScatterProps) => {
   const data = reshapeScatterData(results, numRows)
-  console.log(data)
+  const scaler = 140 / (Math.sqrt(results.length))
 
   return (
     <Svg width='200' height='150' >
-        <G scale={scale*2}>
+        <G scale={scaler}>
           
         {data.map((dat, index) => 
             <ScatterThick key={index} data={dat} index={index} />)}
@@ -34,7 +34,7 @@ const Scatter = ({results, scale=1, numRows=30}:ScatterProps) => {
 )}
 
 
-const Pie = ({r=50, data, scale=0.7}: PieProps) => {
+const Pie = ({r=50, data, scale=0.6}: PieProps) => {
     const circleProps = useMemo(() =>  
       getPieCircleProps({data, r}), [r])
     const position = useMemo(() => `${r/scale}%`, [scale, r])

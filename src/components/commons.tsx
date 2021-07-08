@@ -46,7 +46,6 @@ const StyledButton = (props:CustomButtonProps) => {
         shadowColor: theme.color.shadow,
         shadowOffset: {width: 4, height: 4},
         shadowRadius: 5,
-        width: '90%',
         elevation: 4,
         ...props.style
         },
@@ -74,8 +73,8 @@ const MainContainer = (props:MainContainerProps) => {
 
     return <View {...props}
                 style={{
-                    margin: 3,
-                    flex: 1, 
+                    margin: 3, 
+                    flex: 1,
                     justifyContent: 'center', 
                     alignItems: 'center',
                     backgroundColor: theme.color.bgMain,
