@@ -7,9 +7,10 @@ import { Numpad } from '../components/Numpad'
 import { KpauliScreenProps, renderNumberProps } from './types'
 import { randomArray } from '../utils/commons.utils'
 
-import { Timer } from '../components/Timer'
+import { Timer, useTimer } from '../components/Timer'
 import { useEffect } from 'react'
 import { useStorage } from '../storage'
+import { TimerProps } from '../components/interfaces'
 
 
 class RenderNumber extends PureComponent<renderNumberProps> {
@@ -29,10 +30,13 @@ export const Kpauli = ({route, navigation}: KpauliScreenProps) => {
         time,
         position,
         setPosition,
-        updateAnswers
+        updateAnswers,
+        setTimeLeft
     } = useStorage()
     const numbersRef = useRef<FlatList>(null!)
     const [NumpadDisabled, setNumpadDisabled] = useState(false)
+    
+  
 
     useLayoutEffect(() => {
         setTimeout(() => numbersRef.current.scrollToOffset({offset: position * 100}), 100)
@@ -58,14 +62,22 @@ export const Kpauli = ({route, navigation}: KpauliScreenProps) => {
         if (position < numbers.length) setPosition(prev => prev + 1)
     }
     const handleSubmit = () => {
+        setTimeLeft(timeLeft)
         navigation.replace('Result')
+
     }
+    const [timeLeft] = useTimer(time*60, handleSubmit)
+
 
     return (
         <MainContainer>
             <View style={{flex: 1}}>          
-                <View style={styles.timer}>
-                    <Timer initialTime={time*60} performTimesUp={handleSubmit} />
+                <View style={styles.timer}> 
+                    <StyledText 
+                    style={{ height: route.params.showTimer ? 'auto' : 0 }} 
+                    > 
+                    {timeLeft}    
+                    </StyledText>
                     <StyledButton onPress={handleSubmit} title='submit' />
                 </View>
                 

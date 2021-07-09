@@ -11,9 +11,11 @@ interface storage {
     answers: string[]; 
     results: number[]; 
     position: number;
+    timeLeft: number;
     setTime: React.Dispatch<React.SetStateAction<number>>,
     setLength: React.Dispatch<React.SetStateAction<number>>,
     setPosition: React.Dispatch<React.SetStateAction<number>>;
+    setTimeLeft: React.Dispatch<React.SetStateAction<number>>;
     launch: (t:number, l:number) => void;
     updateResults: (position: number, answer: number) => void; 
     updateAnswers: (position: number, answer: string) => void;
@@ -25,22 +27,17 @@ const useCreateStorage = () => {
     const [time, setTime] = useState(20)
     const [numbers, setNumber] = useState<number[]>([])
     const [answers, setAnswers] = useState<string[]>([])
-    const [results, setResults] = useState<number[]>([
-        ...new Array(1000).fill(0), 
-        ...new Array(500).fill(-1),
-        ...new Array(1000).fill(1),
-        ...new Array(1000).fill(-1),
-        ...new Array(500).fill(0),
-        ...new Array(1000).fill(1)
-    ])
+    const [results, setResults] = useState<number[]>([])
     const [position, setPosition] = useState(0)
     const [answerChangedCount, setAnswerChangedCount] = useState(0)
+    const [timeLeft, setTimeLeft] = useState(time*60)
 
     const launch = (t=20, l=2000)  => {
         setLength(l)
         setTime(t)
         setNumber(randomArray({length: l}))
         setAnswers(new Array(l).fill(''))
+        setResults(new Array(l).fill(0))
         setPosition(0)
     }
     const updateAnswers = (position:number, answer:string) => {
@@ -66,6 +63,8 @@ const useCreateStorage = () => {
         answers, 
         results,
         position,
+        timeLeft,
+        setTimeLeft,
         setPosition,
         setLength,
         setTime, 

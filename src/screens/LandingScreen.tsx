@@ -12,6 +12,7 @@ import { AnimatedLogo } from '../components/AnimatedLogo'
 
 export const LandingScreen = ({navigation}:LandingScreenProps) => {
     const {theme, toggleTheme} = useTheme()
+    const themeId = theme.id === 'DARK_THEME' ? 'dark' : 'light'
 
     const styles = useThemeAwareObject(createStyle)
 
@@ -23,8 +24,9 @@ export const LandingScreen = ({navigation}:LandingScreenProps) => {
             </View>
             <View style={styles.container}>
                 <StyledButton style={styles.button} fontSize={24} title='START' onPress={() => navigation.navigate('Launch')} />
-                <StyledButton style={styles.button} fontSize={24} title='RESULT' onPress={toggleTheme} />
-                <StyledButton style={styles.button} fontSize={24} title='testbutton' onPress={() => {}} />
+                <StyledButton style={styles.button} fontSize={24} title='How to' onPress={() => {}} />
+                <StyledButton style={styles.button} fontSize={24} title='Last result' onPress={() => navigation.navigate('Result')} />
+                <StyledButton style={styles.button} fontSize={24} title={`Theme: ${themeId}`} onPress={toggleTheme} />
             </View>
         </MainContainer>
     )

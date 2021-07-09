@@ -15,7 +15,7 @@ type StackParam ={
     Home: undefined,
     Kpauli: any,
     Launch: undefined,
-    Result: undefined,
+    Result: any,
     Loading: undefined
 }
 
@@ -27,8 +27,7 @@ type KpauliScreenProps = {
     navigation: StackNavigationProp<StackParam, 'Kpauli'>,
     route: {
         params: {
-            length: number,
-            time: number
+            showTimer: boolean
         }
     }
 }
@@ -38,7 +37,12 @@ type LaunchScreenProps = {
 }
 
 type ResultScreenProps = {
-    navigation: StackNavigationProp<StackParam, 'Result'>
+    navigation: StackNavigationProp<StackParam, 'Result'>,
+    route: {
+        params: {
+            timeleft: number
+        }
+    }
 }
 
 type LoadingScreenProps = {

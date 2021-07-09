@@ -14,7 +14,7 @@ export const Launch = ({navigation}:LaunchScreenProps) => {
 
     const handleStart = () => {
         launch(time, length)
-        navigation.navigate('Kpauli')
+        navigation.navigate('Kpauli', { showTimer })
     }
 
 

@@ -1,3 +1,4 @@
+import React from "react";
 import { PressableProps, ViewStyle, ViewProps, TextProps } from "react-native";
 import { CircleProps } from "react-native-svg";
 
@@ -39,8 +40,10 @@ interface CustomTextProps extends TextProps {
 }
 
 interface TimerProps extends CustomTextProps {
+    ref: any,
     performTimesUp?: Function,
     initialTime?: number,
+    setTimeLeft?: () => void
 }
 
 

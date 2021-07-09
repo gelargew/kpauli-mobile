@@ -11,14 +11,12 @@ import { useStorage } from '../storage'
 
 export const Result = ({navigation}: ResultScreenProps) => {
     const [loadScatter, setLoadScatter] = useState(false)
-    const results = [
-        ...new Array(700).fill(-1),
-        ...new Array(300).fill(0)
-    ]
     const {
         answerChangedCount,
         length,
-        time
+        time,
+        results,
+        timeLeft
     } = useStorage()
     const styles = useThemeAwareObject(createStyles)
     const [wrong, empty, correct] = results.reduce((accumulator, curValue) => {
@@ -40,21 +38,25 @@ export const Result = ({navigation}: ResultScreenProps) => {
             value: correct
         }
     ]
+    const toHHMMSS = (time:number): string => {
+        const date = new Date(time*1000)
+        return date.toISOString().substring(12, 19)
+    }
 
     useLayoutEffect(() => {
         setTimeout(() => setLoadScatter(true), 1000)
         return setLoadScatter(false)
     }, [])
 
-    const scatterScale = results.length > 3000 ? 1 : 2
     return (
         <MainContainer style={styles.mainContainer}> 
              
-            <StyledText style={styles.h1}>{getRowNums(results.length)}</StyledText>
+            <StyledText style={styles.h1}>Result</StyledText>
             <PlainCard style={styles.pieContainer}>
                 <Pie data={pieData} />
                 <View style={{justifyContent: 'center'}}>
-                    <StyledText>time: {time}</StyledText>
+                    <StyledText>time: {time} minutes</StyledText>
+                    <StyledText>elapsed time: {toHHMMSS(time*60 - timeLeft)}</StyledText>
                     <StyledText>length: {length}</StyledText>
                     <StyledText>correct: {correct}</StyledText>
                     <StyledText>wrong: {wrong}</StyledText>

@@ -5,7 +5,7 @@ import { TimerProps } from './interfaces'
 
 export { Timer, useTimer }
 
-const useTimer = (initialTime=600, performTimesUp?:Function) => {
+const useTimer = (initialTime=600, performTimesUp?:(Function)) => {
     const [time, setTime] = useState(initialTime)
 
     useEffect(() => {
@@ -25,6 +25,7 @@ const useTimer = (initialTime=600, performTimesUp?:Function) => {
 
 const Timer = (props:TimerProps) => {
     const [time] = useTimer(props.initialTime, props.performTimesUp)
+
     
     return <StyledText {...props}>{time}</StyledText>
 }

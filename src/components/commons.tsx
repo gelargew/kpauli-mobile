@@ -46,7 +46,7 @@ const StyledButton = (props:CustomButtonProps) => {
         shadowColor: theme.color.shadow,
         shadowOffset: {width: 4, height: 4},
         shadowRadius: 5,
-        elevation: 4,
+        elevation: 1,
         ...props.style
         },
         {}
